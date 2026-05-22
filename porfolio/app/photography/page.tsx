@@ -11,26 +11,26 @@ const photos = [
     id: 1,
     title: "DIGITAL",
     src: Digital,
-    href: "#",
+    href: "/digital",
   },
   {
     id: 2,
     title: "PORTFOLIO",
     src: Digital,
-    href: "#",
+    href: "/portfolio",
   },
   {
     id: 3,
     title: "FILM",
     src: Digital,
-    href: "#",
+    href: "/film",
   },
 ];
 
 export default function Photo() {
   return (
     <div className="page-background mx-auto justify-items-center-safe mt-10 pt-6">
-      <div className="grid grid-cols-1 gap-5 flex-col justify-center pt-15 pb-10">
+      <div className="grid grid-cols-1 gap-5 flex-col justify-center pt-5 pb-10">
             <motion.a
                 href="https://www.instagram.com/diopooka/"
                 target="_blank"
@@ -65,10 +65,10 @@ export default function Photo() {
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="absolute inset-0 bg-black/60 flex items-center justify-center"
+                className="absolute inset-0 bg-[#502419]/60 flex items-center justify-center"
               >
                 <p
-                  className="text-white text-xl font-bold px-4 h-full flex items-center justify-center"
+                  className="text-[#FFFFE7] text-3xl font-bold px-4 h-full flex items-center justify-center"
                   style={{ writingMode: "vertical-rl", textOrientation: "upright" }}
                 >
                   {p.title}

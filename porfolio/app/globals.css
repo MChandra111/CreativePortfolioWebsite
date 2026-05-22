@@ -129,13 +129,13 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-linear-to-br from-[#FFFCBB] to-[#FFFFE7] text-foreground;
+    @apply bg-linear-to-br from-[#FFFCBB] to-[#FFFFE7] text-foreground overflow-y-hidden;
   }
   html {
     @apply font-(--Inter) text-base;
   }
 
   .page-background {
-    @apply min-h-screen overflow-y-hidden;
+    @apply min-h-screen;
   }
 }

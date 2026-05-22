@@ -23,7 +23,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
   return (
     <Link key={project.id} href={project.href} className="block">
     <motion.div
-      className="relative w-120 max-w-full bg-[#fefef2] rounded-2xl p-6 shadow-sm cursor-pointer"
+      className="relative w-120 max-w-full bg-[#ffffde] rounded-2xl p-6 shadow-sm cursor-pointer"
       style={{ borderColor: "#71AD9B", borderWidth: "1px" }}
       whileHover={{ x: 8 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
