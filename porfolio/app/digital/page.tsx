@@ -37,18 +37,32 @@ export default function DigitalPage() {
 
   return (
     <main className="page-background mx-auto justify-items-center-safe mt-10 px-6 pb-16">
-      <h1 className="text-4xl font-bold mb-6">Digital Photography</h1>
-      
       <div className="w-full h-full gap-6">
         <Carousel
-          cards={photos.map((p, idx) => ({
-            id: idx,
-            title: p.title,
-            imageUrl: p.src,
-            tags: p.tags || [],
-            location: p.location,
-            date: p.date ? new Date(p.date) : "Unknown Date",
-          }))}
+          albumName="Other"
+          cards={photos
+            .filter((p) => p.album === "other")
+            .map((p, idx) => ({
+              id: idx,
+              title: p.title,
+              imageUrl: p.src,
+              tags: p.tags || [],
+              location: p.location,
+              date: p.date ? new Date(p.date) : "Unknown",
+            }))}
+        />
+        <Carousel
+          albumName="Japan 2025"
+          cards={photos
+            .filter((p) => p.album === "japan25")
+            .map((p, idx) => ({
+              id: idx,
+              title: p.title,
+              imageUrl: p.src,
+              tags: p.tags || [],
+              location: p.location,
+              date: p.date ? new Date(p.date) : "Unknown",
+            }))}
         />
       </div>
     </main>

@@ -29,10 +29,10 @@ const photos = [
 
 export default function Photo() {
   return (
-    <div className="page-background mx-auto justify-items-center-safe mt-10 pt-6">
+    <div className="mx-auto justify-items-center-safe mt-10 pt-6">
       <div className="grid grid-cols-1 gap-5 flex-col justify-center pt-5 pb-10">
             <motion.a
-                href="https://www.instagram.com/diopooka/"
+                href="https://www.instagram.com/di0pika/"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}

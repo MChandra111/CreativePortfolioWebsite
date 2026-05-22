@@ -7,4 +7,5 @@ export interface Photo {
   location: string;
   date: Date;
   tags?: string[];
+  album?: string;
 }

@@ -11,9 +11,11 @@ interface CardData {
   location?: string;
   tags?: string[];
   date?: Date | string;
+  album?: string;
 }
 
 interface CarouselProps {
+  albumName?: string;
   cards?: CardData[];
 }
 
@@ -123,7 +125,7 @@ const cardData: CardData[] = [
   },
 ];
 
-export default function Carousel({ cards = cardData }: CarouselProps) {
+export default function Carousel({ cards = cardData, albumName= "Other" }: CarouselProps) {
   const items = cards.length > 0 ? cards : cardData;
   const [activeIndex, setActiveIndex] = useState(
     Math.floor(items.length / 2)
@@ -228,8 +230,11 @@ export default function Carousel({ cards = cardData }: CarouselProps) {
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        <div className="relative flex w-full flex-col rounded-3xl border border-white/10 dark:border-white/10 bg-white dark:bg-neutral-900 p-4 pt-6 md:p-6">
-          <div className="relative w-full h-70 md:h-100 flex items-center justify-center overflow-hidden pt-12">
+        <div className="relative flex w-full flex-col rounded-3xl shadow-lg/20 bg-white dark:border-white/10 dark:bg-neutral-900 p-4 pt-6 md:p-6">
+          <div className="flex items-center justify-center mb-8">
+        <h2 className="text-5xl font-bold"> {albumName} </h2>
+      </div>
+          <div className="relative w-full h-70 md:h-100 flex items-center justify-center overflow-hidden">
             <motion.div
               className="w-full h-full flex items-center justify-center"
               drag="x"
@@ -271,7 +276,7 @@ export default function Carousel({ cards = cardData }: CarouselProps) {
                   onClick={() => changeSlide(index)}
                   className={`h-2 rounded-full transition-all duration-300 focus:outline-none ${
                     activeIndex === index
-                      ? "w-6 bg-pink-400"
+                      ? "w-6 bg-[#71AD9B]"
                       : "w-2 bg-gray-300 dark:bg-neutral-600 hover:bg-gray-400 dark:hover:bg-neutral-500"
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
@@ -387,9 +392,9 @@ export default function Carousel({ cards = cardData }: CarouselProps) {
                   </button>
 
                   <div className="absolute bottom-full right-0 mb-2 hidden opacity-80 w-56 rounded-md bg-black/85 p-3 text-white text-sm group-hover:block">
-                    <h4 className="font-semibold">Location: {fullscreenCard.location || 'Location unknown'}</h4>
-                    <p className="mt-1 text-xs opacity-80">Date: {typeof fullscreenCard.date === 'string' ? fullscreenCard.date : fullscreenCard.date?.toLocaleDateString() || 'Date unknown'}</p>
-                    <p className="mt-1 text-xs opacity-80">Tags: {fullscreenCard.tags?.join(", ") || 'No tags'}</p>
+                    <h4 className="font-semibold">Location: {fullscreenCard.location || 'Unknown'}</h4>
+                    <p className="mt-1 text-xs opacity-80">Date: {typeof fullscreenCard.date === 'string' ? fullscreenCard.date : fullscreenCard.date?.toLocaleDateString() || 'Unknown'}</p>
+                    <p className="mt-1 text-xs opacity-80">Tags: {fullscreenCard.tags?.join(", ") || 'None'}</p>
                   </div>
                 </div>
               </div>
