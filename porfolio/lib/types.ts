@@ -1,9 +1,10 @@
 export interface Photo {
-  _id?: string;
-  title: string;
-  category: "digital" | "portfolio" | "film";
+  _id: string;
   src: string;
-  href: string;
-  description?: string;
-  createdAt?: Date;
+  category: "digital" | "film";
+  title: string;
+  portfolio: boolean;
+  location: string;
+  date: Date;
+  tags?: string[];
 }

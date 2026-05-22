@@ -41,7 +41,6 @@ export default function FilmPage() {
         {photos.map((p, idx) => (
           <motion.a
             key={idx}
-            href={p.href}
             whileHover={{ y: -20 }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 300, damping: 24 }}

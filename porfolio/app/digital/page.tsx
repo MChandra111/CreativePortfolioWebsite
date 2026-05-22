@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
 import { Photo } from "@/lib/types";
 import Atom from "react-loading-indicators/Atom";
+import Carousel from "@/components/carousel";
 
 export default function DigitalPage() {
   const [photos, setPhotos] = useState<Photo[]>([]);
@@ -40,26 +39,17 @@ export default function DigitalPage() {
     <main className="page-background mx-auto justify-items-center-safe mt-10 px-6 pb-16">
       <h1 className="text-4xl font-bold mb-6">Digital Photography</h1>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {photos.map((p, idx) => (
-          <motion.a
-            key={idx}
-            href={p.href}
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: "spring", stiffness: 300, damping: 24 }}
-            className="group block overflow-hidden rounded-xl shadow-lg bg-white/5"
-          >
-            <div className="relative h-56 w-full bg-gray-100">
-              <Image
-                src={p.src}
-                alt={p.title}
-                height={224}
-                width={384}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </motion.a>
-        ))}
+      <div className="w-full h-full gap-6">
+        <Carousel
+          cards={photos.map((p, idx) => ({
+            id: idx,
+            title: p.title,
+            imageUrl: p.src,
+            tags: p.tags || [],
+            location: p.location,
+            date: p.date ? new Date(p.date) : "Unknown Date",
+          }))}
+        />
       </div>
     </main>
   );

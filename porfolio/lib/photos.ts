@@ -10,7 +10,7 @@ export async function getPhotosByCategory(category: string): Promise<Photo[]> {
     .find({ category })
     .toArray();
   
-  return photos as Photo[];
+  return photos as unknown as Photo[];
 }
 
 export async function getAllPhotos(): Promise<Photo[]> {
@@ -22,7 +22,7 @@ export async function getAllPhotos(): Promise<Photo[]> {
     .find({})
     .toArray();
   
-  return photos as Photo[];
+  return photos as unknown as Photo[];
 }
 
 export async function seedPhotos(photos: Photo[]) {
@@ -34,6 +34,8 @@ export async function seedPhotos(photos: Photo[]) {
   await collection.deleteMany({});
   
   // Insert new photos
-  const result = await collection.insertMany(photos);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const docs = photos.map(({ _id, ...photo }) => photo);
+  const result = await collection.insertMany(docs);
   return result;
 }
