@@ -1,22 +1,23 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import { motion } from "motion/react";
 import { Folder } from "lucide-react";
 import BorderGlow from '@/components/BorderGlow';
 
 const folders = [
-  { id: 1, label: "Software", color: "#71AD9B" },
-  { id: 2, label: "Photography", color: "#71AD9B" },
-  { id: 3, label: "Music", color: "#71AD9B" },
-  { id: 4, label: "Blog", color: "#71AD9B" },
+  { id: 1, label: "Software", color: "#71AD9B", href: "/software" },
+  { id: 2, label: "Photography", color: "#71AD9B", href: "/photography" },
+  { id: 3, label: "Music", color: "#71AD9B", href: "/music" },
+  { id: 4, label: "Blog", color: "#71AD9B", href: "/blog" },
 ];
 
 export default function Home() {
   return (
     <div className="page-background min-h-screen size-full flex flex-col items-center justify-center gap-10 bg-linear-to-br from-[#FFFCBB] to-[#FFFFE7]">
-      <div className="text-center">
+      <div className="text-center cursor-default">
         <BorderGlow
-          edgeSensitivity={30}
+          edgeSensitivity={5}
           glowColor="40 80 80"
           backgroundColor="#71AD9B"
           borderRadius={20}
@@ -33,6 +34,7 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-2 gap-16">
         {folders.map((folder) => (
+          <Link key={folder.id} href={folder.href} className="block">
           <motion.div
             key={folder.id}
             className="relative cursor-pointer"
@@ -50,6 +52,7 @@ export default function Home() {
               {folder.label}
             </span>
           </motion.div>
+          </Link>
         ))}
       </div>
     </div>

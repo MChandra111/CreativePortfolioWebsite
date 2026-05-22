@@ -6,6 +6,7 @@
 
 :root {
   --font-size: 16px;
+  --font-family: "Inter", sans-serif;
   --background: #ffffff;
   --foreground: oklch(0.145 0 0);
   --card: #ffffff;
@@ -128,10 +129,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-linear-to-br from-[#FFFCBB] to-[#FFFFE7] text-foreground;
   }
   html {
-    @apply font-sans;
+    @apply font-(--Inter) text-base;
   }
 
   .page-background {
