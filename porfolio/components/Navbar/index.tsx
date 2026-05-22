@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <nav className="w-full border-b bg-white">
+    <nav className="w-full border-b bg-primary">
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="text-xl font-semibold">Portfolio</Link>
         <div className="flex gap-4">
