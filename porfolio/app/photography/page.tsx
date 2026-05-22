@@ -53,7 +53,7 @@ export default function Photo() {
             transition={{ type: "spring", stiffness: 300, damping: 24 }}
             className="group block overflow-hidden rounded-xl shadow-lg bg-white/5"
           >
-            <div className="relative h-200 max-h-fit w-100 bg-gray-100">
+            <div className="relative h-200 max-h-fit w-100 bg-transparent">
               <Image
                 src={p.src}
                 alt={p.title}

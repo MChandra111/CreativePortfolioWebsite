@@ -45,8 +45,7 @@ export default function DigitalPage() {
           <motion.a
             key={idx}
             href={p.href}
-            whileHover={{ y: -20 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.1 }}
             transition={{ type: "spring", stiffness: 300, damping: 24 }}
             className="group block overflow-hidden rounded-xl shadow-lg bg-white/5"
           >
@@ -56,21 +55,8 @@ export default function DigitalPage() {
                 alt={p.title}
                 height={224}
                 width={384}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                className="w-full h-full object-cover"
               />
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                className="absolute inset-0 bg-black/60 flex items-center justify-center"
-              >
-                <p
-                  className="text-white text-xl font-bold px-4 h-full flex items-center justify-center"
-                  style={{ writingMode: "vertical-rl", textOrientation: "upright" }}
-                >
-                  {p.title}
-                </p>
-              </motion.div>
             </div>
           </motion.a>
         ))}
