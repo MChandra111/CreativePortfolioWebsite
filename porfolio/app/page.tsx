@@ -28,7 +28,7 @@ export default function Home() {
           colors={['#c084fc', '#f472b6', '#38bdf8']}
         >
           <div style={{ padding: '2em' }}>
-            <p className="text-3xl font-bold text-[#FFFFE7]">Maheshwar Chandra Portfolio</p>
+            <p className="text-4xl font-bold text-[#FFFFE7]">Maheshwar Chandra Portfolio</p>
           </div>
         </BorderGlow>
       </div>
@@ -40,7 +40,7 @@ export default function Home() {
             className="relative cursor-pointer"
             whileHover={{ scale: 1.1, y: -8 }}
             whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            transition={{ type: "spring", stiffness: 300, damping: 10 }}
           >
             <Folder
               size={300}

@@ -3,10 +3,9 @@ import React from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { useState } from "react";
-import githubIcon from "./github.png";
-import linkedinIcon from "./linkedin.png";
-import Image from "next/image";
-import GlareHover from '@/components/GlareHover'
+import { GithubIcon } from "@/components/ui/github";
+import BorderGlow from "@/components/BorderGlow";
+import { LinkedinIcon } from "@/components/ui/linkedin";
 
 const projects = [
   {
@@ -24,15 +23,15 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
   return (
     <Link key={project.id} href={project.href} className="block">
     <motion.div
-      className="relative w-110 max-w-full bg-[#71AD9B] rounded-2xl p-6 shadow-sm cursor-pointer"
+      className="relative w-120 max-w-full bg-[#fefef2] rounded-2xl p-6 shadow-sm cursor-pointer"
       style={{ borderColor: "#71AD9B", borderWidth: "1px" }}
       whileHover={{ x: 8 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onHoverStart={() => setShowTech(true)}
       onHoverEnd={() => setShowTech(false)}
     >
-      <h3 className="mb-2 text-xl text-[#FFFFE7]">{project.name}</h3>
-      <p className="text-sm text-[#FFFFE7]">{project.description}</p>
+      <h3 className="mb-2 text-xl text-[#71AD9B] font-bold">{project.name}</h3>
+      <p className="text-md text-[#71AD9B]">{project.description}</p>
 
       {showTech && (
         <motion.div
@@ -68,31 +67,49 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
 export default function About() {
   return (
     <div className="page-background min-h-screen size-full flex flex-col items-center bg-linear-to-br from-[#FFFCBB] to-[#FFFFE7]">
-      <div className="text-center pt-15">
-        <h1 className="text-4xl font-bold text-[#71AD9B]">
+      <div className="text-center pt-15 padding">
+        <BorderGlow
+          edgeSensitivity={5}
+          glowColor="40 80 80"
+          backgroundColor="#71AD9B"
+          borderRadius={20}
+          glowRadius={40}
+          glowIntensity={1}
+          coneSpread={25}
+          animated={false}
+          colors={['#c084fc', '#f472b6', '#38bdf8']}
+        >
+        <div style={{ padding: '1.5em' }}>
+        <h1 className="text-4xl font-bold text-[#FFFFE7]">
           Software Projects
         </h1>
+        </div>
+        </BorderGlow>
       </div>
-      <div className="grid grid-cols-2 justify-items-center gap-16 mt-10">
-          <GlareHover
-            glareColor="#71AD9B"
-            glareOpacity={0.4}
-            glareAngle={-30}
-            glareSize={300}
-            transitionDuration={1000}
-            playOnce={true}>
-            <Image src={githubIcon} alt="Github Icon" height={100} width={100} onClick={() => window.open("https://github.com/MChandra111", "_blank")} />
-          </GlareHover>
-          <GlareHover
-            glareColor="#71AD9B"
-            glareOpacity={0.4}
-            glareAngle={-30}
-            glareSize={300}
-            transitionDuration={1000}
-            playOnce={true}>
-            <Image src={linkedinIcon} alt="LinkedIn Icon" height={100} width={100} onClick={() => window.open("https://www.linkedin.com/in/maheshwar-chandra/", "_blank")} />
-          </GlareHover>
-      </div>
+          <div className="grid grid-cols-2 gap-5 flex-col justify-center pt-5">
+            <motion.a
+                href="https://github.com/MChandra111"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-3 rounded-full"
+                style={{ backgroundColor: "#71AD9B" }}
+              >
+                <GithubIcon size={35} color="white" />
+              </motion.a>
+            <motion.a
+              href="https://www.linkedin.com/in/maheshwar-chandra/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-3 rounded-full"
+              style={{ backgroundColor: "#71AD9B" }}
+            >
+              <LinkedinIcon size={35} color="white" />
+            </motion.a>
+          </div>
 
       <div className="max-w-3xl mx-auto flex flex-col gap-6 pt-10">
           {projects.map((project) => (
