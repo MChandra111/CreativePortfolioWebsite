@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, PanInfo } from "framer-motion";
 import Image from "next/image";
 
@@ -8,18 +8,17 @@ interface CardData {
   id: number;
   imageUrl: string;
   title: string;
-  location?: string;
+  year?: string;
   tags?: string[];
-  date?: Date | string;
-  album?: string;
-}
-
-interface CarouselProps {
-  albumName?: string;
-  cards?: CardData[];
+  href?: string;
 }
 
 interface IconProps {
+  className?: string;
+}
+
+interface BadgeProps {
+  children: React.ReactNode;
   className?: string;
 }
 
@@ -28,9 +27,24 @@ interface CardProps {
   index: number;
   activeIndex: number;
   totalCards: number;
-  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
+const SparklesIcon: React.FC<IconProps> = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M9.93 2.25 12 7.5l2.07-5.25a.5.5 0 0 1 .9 0L17.25 8.5l4.16.34a.5.5 0 0 1 .29.88l-3.2 3.1.95 4.5a.5.5 0 0 1-.73.53L12 14.5l-3.72 2.33a.5.5 0 0 1-.73-.53l.95-4.5-3.2-3.1a.5.5 0 0 1 .29-.88l4.16-.34Z" />
+  </svg>
+);
 
 const ChevronLeftIcon: React.FC<IconProps> = ({ className }) => (
   <svg
@@ -66,7 +80,13 @@ const ChevronRightIcon: React.FC<IconProps> = ({ className }) => (
   </svg>
 );
 
-// Badge component removed (unused)
+const Badge: React.FC<BadgeProps> = ({ children, className }) => (
+  <div
+    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium ${className}`}
+  >
+    {children}
+  </div>
+);
 
 const cardData: CardData[] = [
   {
@@ -125,30 +145,17 @@ const cardData: CardData[] = [
   },
 ];
 
-export default function Carousel({ cards = cardData, albumName= "Other" }: CarouselProps) {
-  const items = cards.length > 0 ? cards : cardData;
+export default function Carousel() {
   const [activeIndex, setActiveIndex] = useState(
-    Math.floor(items.length / 2)
+    Math.floor(cardData.length / 2)
   );
   const [isPaused, setIsPaused] = useState(false);
-  const [fullscreenCard, setFullscreenCard] = useState<CardData | null>(null);
-  const [fullscreenRect, setFullscreenRect] = useState<{
-    top: number;
-    left: number;
-    width: number;
-    height: number;
-  } | null>(null);
-  const [isClosing, setIsClosing] = useState(false);
-  const [fullscreenDimensions, setFullscreenDimensions] = useState<{
-    width: number;
-    height: number;
-  } | null>(null);
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const autoplayDelay = 3000;
 
-  const goToNext = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % items.length);
-  }, [items.length]);
+  const goToNext = () => {
+    setActiveIndex((prev) => (prev + 1) % cardData.length);
+  };
 
   useEffect(() => {
     if (!isPaused) {
@@ -159,10 +166,10 @@ export default function Carousel({ cards = cardData, albumName= "Other" }: Carou
         clearInterval(autoplayIntervalRef.current);
       }
     };
-  }, [isPaused, goToNext]);
+  }, [isPaused, activeIndex]);
 
   const changeSlide = (newIndex: number) => {
-    const newSafeIndex = (newIndex + items.length) % items.length;
+    const newSafeIndex = (newIndex + cardData.length) % cardData.length;
     setActiveIndex(newSafeIndex);
     if (autoplayIntervalRef.current) {
       clearInterval(autoplayIntervalRef.current);
@@ -185,44 +192,6 @@ export default function Carousel({ cards = cardData, albumName= "Other" }: Carou
     }
   };
 
-  const openFullscreen = (card: CardData, rect: DOMRect | null) => {
-    setFullscreenCard(card);
-    if (rect) {
-      setFullscreenRect({
-        top: rect.top,
-        left: rect.left,
-        width: rect.width,
-        height: rect.height,
-      });
-    } else {
-      setFullscreenRect(null);
-    }
-    setIsPaused(true);
-    setIsClosing(false);
-  };
-
-  const closeFullscreen = () => {
-    // trigger closing animation back to original rect
-    setIsClosing(true);
-    setIsPaused(true);
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        closeFullscreen();
-      }
-    };
-
-    if (fullscreenCard) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [fullscreenCard]);
-
   return (
     <section className="w-full flex-col items-center justify-center font-sans overflow-hidden">
       <div
@@ -230,11 +199,13 @@ export default function Carousel({ cards = cardData, albumName= "Other" }: Carou
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        <div className="relative flex w-full flex-col rounded-3xl shadow-lg/20 bg-white dark:border-white/10 dark:bg-neutral-900 p-4 pt-6 md:p-6">
-          <div className="flex items-center justify-center mb-8">
-        <h2 className="text-5xl font-bold"> {albumName} </h2>
-      </div>
-          <div className="relative w-full h-70 md:h-100 flex items-center justify-center overflow-hidden">
+        <div className="relative flex w-full flex-col rounded-3xl border border-white/10 dark:border-white/10 bg-white dark:bg-neutral-900 p-4 pt-6 md:p-6">
+          <Badge className="absolute left-4 top-6 rounded-xl border border-gray-300 dark:border-white/10 text-base text-gray-700 dark:text-white/80 bg-gray-100/80 dark:bg-black/20 backdrop-blur-sm md:left-6">
+            <SparklesIcon className="fill-[#EEBDE0] stroke-1 text-neutral-800 h-5 w-5 mr-1" />
+            Enhanced Carousel
+          </Badge>
+
+          <div className="relative w-full h-70 md:h-100 flex items-center justify-center overflow-hidden pt-12">
             <motion.div
               className="w-full h-full flex items-center justify-center"
               drag="x"
@@ -242,20 +213,13 @@ export default function Carousel({ cards = cardData, albumName= "Other" }: Carou
               dragElastic={0.2}
               onDragEnd={onDragEnd}
             >
-              {items.map((card, index) => (
+              {cardData.map((card, index) => (
                 <Card
                   key={card.id}
                   card={card}
                   index={index}
                   activeIndex={activeIndex}
-                  totalCards={items.length}
-                  onClick={(e) => {
-                    if (index === activeIndex) {
-                      const el = e.currentTarget as HTMLElement;
-                      const rect = el.getBoundingClientRect();
-                      openFullscreen(card, rect);
-                    }
-                  }}
+                  totalCards={cardData.length}
                 />
               ))}
             </motion.div>
@@ -270,13 +234,13 @@ export default function Carousel({ cards = cardData, albumName= "Other" }: Carou
             </button>
 
             <div className="flex items-center justify-center gap-2">
-              {items.map((_, index) => (
+              {cardData.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => changeSlide(index)}
                   className={`h-2 rounded-full transition-all duration-300 focus:outline-none ${
                     activeIndex === index
-                      ? "w-6 bg-[#71AD9B]"
+                      ? "w-6 bg-pink-400"
                       : "w-2 bg-gray-300 dark:bg-neutral-600 hover:bg-gray-400 dark:hover:bg-neutral-500"
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
@@ -293,120 +257,11 @@ export default function Carousel({ cards = cardData, albumName= "Other" }: Carou
           </div>
         </div>
       </div>
-      {fullscreenCard && fullscreenRect ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div
-            className="absolute inset-0 bg-black/85"
-            onClick={closeFullscreen}
-          />
-
-          <motion.div
-            initial={{
-              top: fullscreenRect.top,
-              left: fullscreenRect.left,
-              width: fullscreenRect.width,
-              height: fullscreenRect.height,
-              position: "fixed",
-            }}
-            animate={
-              isClosing && fullscreenRect
-                ? {
-                    top: fullscreenRect.top,
-                    left: fullscreenRect.left,
-                    x: 0,
-                    y: 0,
-                    width: fullscreenRect.width,
-                    height: fullscreenRect.height,
-                    position: "fixed",
-                  }
-                : {
-                    top: "50%",
-                    left: "50%",
-                    x: "-50%",
-                    y: "-50%",
-                    width: fullscreenDimensions?.width || "90vw",
-                    height: fullscreenDimensions?.height || "90vh",
-                    position: "fixed",
-                  }
-            }
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="z-50 rounded-3xl overflow-hidden bg-black"
-            onClick={(e) => e.stopPropagation()}
-            onAnimationComplete={() => {
-              if (isClosing) {
-                setFullscreenCard(null);
-                setFullscreenRect(null);
-                setIsClosing(false);
-                setIsPaused(false);
-                setFullscreenDimensions(null);
-              }
-            }}
-          >
-            <button
-              onClick={closeFullscreen}
-              className="absolute top-4 right-4 z-10 rounded-full bg-white/10 px-3 py-2 text-white hover:bg-white/20"
-            >
-              Close
-            </button>
-
-            <div className="relative w-full h-full">
-              <Image
-                fill
-                src={fullscreenCard.imageUrl}
-                alt={fullscreenCard.title}
-                className="object-contain"
-                onLoad={(result) => {
-                  const img = result.target as HTMLImageElement;
-                  const imgWidth = img.naturalWidth;
-                  const imgHeight = img.naturalHeight;
-                  const aspectRatio = imgWidth / imgHeight;
-                  const maxWidth = window.innerWidth * 0.9;
-                  const maxHeight = window.innerHeight * 0.9;
-                  let width = maxWidth;
-                  let height = width / aspectRatio;
-                  if (height > maxHeight) {
-                    height = maxHeight;
-                    width = height * aspectRatio;
-                  }
-                  setFullscreenDimensions({ width, height });
-                }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null;
-                  target.src =
-                    "https://placehold.co/800x600/1e1e1e/ffffff?text=Image+Missing";
-                }}
-              />
-
-              <div className="absolute bottom-4 right-4 flex items-center">
-                <div className="group relative">
-                  <button
-                    aria-label="Show info"
-                    className="w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="12" y1="16" x2="12" y2="12"></line>
-                      <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                    </svg>
-                  </button>
-
-                  <div className="absolute bottom-full right-0 mb-2 hidden opacity-80 w-56 rounded-md bg-black/85 p-3 text-white text-sm group-hover:block">
-                    <h4 className="font-semibold">Location: {fullscreenCard.location || 'Unknown'}</h4>
-                    <p className="mt-1 text-xs opacity-80">Date: {typeof fullscreenCard.date === 'string' ? fullscreenCard.date : fullscreenCard.date?.toLocaleDateString() || 'Unknown'}</p>
-                    <p className="mt-1 text-xs opacity-80">Tags: {fullscreenCard.tags?.join(", ") || 'None'}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      ) : null}
     </section>
   );
 }
 
-function Card({ card, index, activeIndex, totalCards, onClick }: CardProps) {
+function Card({ card, index, activeIndex, totalCards }: CardProps) {
   let offset = index - activeIndex;
   if (offset > totalCards / 2) {
     offset -= totalCards;
@@ -424,8 +279,6 @@ function Card({ card, index, activeIndex, totalCards, onClick }: CardProps) {
     transition: { type: "spring" as const, stiffness: 260, damping: 30 },
   };
 
-  const isActive = index === activeIndex;
-
   return (
     <motion.div
       className="absolute w-1/2 md:w-1/3 h-[95%]"
@@ -435,16 +288,13 @@ function Card({ card, index, activeIndex, totalCards, onClick }: CardProps) {
       animate={animate}
       initial={false}
     >
-      <div
-        className={`relative w-full h-full rounded-3xl shadow-2xl overflow-hidden bg-gray-200 dark:bg-neutral-800 ${
-          isActive ? "cursor-pointer" : "cursor-default"
-        }`}
-        onClick={isActive ? onClick : undefined}
-      >
+      <div className="relative w-full h-full rounded-3xl shadow-2xl overflow-hidden bg-gray-200 dark:bg-neutral-800">
         <Image
-          fill
           src={card.imageUrl}
           alt={card.title}
+          width={0}
+          height={0}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="w-full h-full object-cover pointer-events-none"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -453,6 +303,9 @@ function Card({ card, index, activeIndex, totalCards, onClick }: CardProps) {
               "https://placehold.co/400x600/1e1e1e/ffffff?text=Image+Missing";
           }}
         />
+        <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/70 to-transparent">
+          <h4 className="text-white text-lg font-semibold">{card.title}</h4>
+        </div>
       </div>
     </motion.div>
   );
