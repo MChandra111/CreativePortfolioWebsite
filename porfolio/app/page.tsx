@@ -27,7 +27,7 @@ export default function Home() {
           colors={['#c084fc', '#f472b6', '#38bdf8']}
         >
           <div style={{ padding: '2em' }}>
-            <p className="text-3xl font-bold text-[#FFFFE7]">Mahesh's Portfolio</p>
+            <p className="text-3xl font-bold text-[#FFFFE7]">Maheshwar Chandra Portfolio</p>
           </div>
         </BorderGlow>
       </div>
