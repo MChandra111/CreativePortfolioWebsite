@@ -1,20 +1,56 @@
+"use client";
 import React from "react";
 import { motion } from "motion/react";
 import { Folder } from "lucide-react";
+import BorderGlow from '@/components/BorderGlow';
 
 const folders = [
-  { id: 1, label: "Projects", color: "#FFB4D6" },
-  { id: 2, label: "Documents", color: "#FFC4E1" },
-  { id: 3, label: "Images", color: "#FFD4EC" },
-  { id: 4, label: "Archive", color: "#FFE4F7" },
+  { id: 1, label: "Software", color: "#71AD9B" },
+  { id: 2, label: "Photography", color: "#71AD9B" },
+  { id: 3, label: "Music", color: "#71AD9B" },
+  { id: 4, label: "Blog", color: "#71AD9B" },
 ];
 
 export default function Home() {
   return (
-    <div className="page-background min-h-screen size-full flex items-center justify-center bg-linear-to-br from-pink-200 via-pink-100 to-pink-50">
+    <div className="page-background min-h-screen size-full flex flex-col items-center justify-center gap-10 bg-linear-to-br from-[#FFFCBB] to-[#FFFFE7]">
+      <div className="text-center">
+        <BorderGlow
+          edgeSensitivity={30}
+          glowColor="40 80 80"
+          backgroundColor="#71AD9B"
+          borderRadius={20}
+          glowRadius={40}
+          glowIntensity={1}
+          coneSpread={25}
+          animated={false}
+          colors={['#c084fc', '#f472b6', '#38bdf8']}
+        >
+          <div style={{ padding: '2em' }}>
+            <p className="text-3xl font-bold text-[#FFFFE7]">Mahesh's Portfolio</p>
+          </div>
+        </BorderGlow>
+      </div>
       <div className="grid grid-cols-2 gap-16">
-        
-        
+        {folders.map((folder) => (
+          <motion.div
+            key={folder.id}
+            className="relative cursor-pointer"
+            whileHover={{ scale: 1.1, y: -8 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+          >
+            <Folder
+              size={300}
+              fill={folder.color}
+              stroke={"#53917E"}
+              strokeWidth={0.1}
+            />
+            <span className="absolute inset-0 flex items-center justify-center text-[#FFFFE7] text-3xl font-bold mt-6">
+              {folder.label}
+            </span>
+          </motion.div>
+        ))}
       </div>
     </div>
   );

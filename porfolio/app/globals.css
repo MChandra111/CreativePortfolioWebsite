@@ -135,6 +135,6 @@
   }
 
   .page-background {
-    @apply min-h-screen bg-linear-to-br from-pink-200 via-pink-100 to-pink-50;
+    @apply min-h-screen;
   }
 }
