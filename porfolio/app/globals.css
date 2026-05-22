@@ -136,6 +136,6 @@
   }
 
   .page-background {
-    @apply min-h-screen;
+    @apply min-h-screen overflow-y-hidden;
   }
 }

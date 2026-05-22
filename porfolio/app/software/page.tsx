@@ -94,7 +94,7 @@ export default function About() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-3 rounded-full"
-                style={{ backgroundColor: "#71AD9B" }}
+                style={{ backgroundColor: "#71AD9B", color: "#FFFFE7" }}
               >
                 <GithubIcon size={35} color="white" />
               </motion.a>
@@ -105,7 +105,7 @@ export default function About() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className="p-3 rounded-full"
-              style={{ backgroundColor: "#71AD9B" }}
+              style={{ backgroundColor: "#71AD9B", color: "#FFFFE7" }}
             >
               <LinkedinIcon size={35} color="white" />
             </motion.a>
