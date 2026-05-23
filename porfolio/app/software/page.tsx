@@ -6,6 +6,7 @@ import { useState } from "react";
 import { GithubIcon } from "@/components/ui/github";
 import BorderGlow from "@/components/BorderGlow";
 import { LinkedinIcon } from "@/components/ui/linkedin";
+import { FileTextIcon } from "@/components/ui/file-text";
 
 const projects = [
   {
@@ -67,7 +68,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
 export default function About() {
   return (
     <div className="page-background min-h-screen size-full flex flex-col items-center bg-linear-to-br from-[#FFFCBB] to-[#FFFFE7]">
-      <div className="text-center pt-15 padding">
+      <div className="text-center pt-15 pb-5 padding">
         <BorderGlow
           edgeSensitivity={5}
           glowColor="40 80 80"
@@ -86,7 +87,7 @@ export default function About() {
         </div>
         </BorderGlow>
       </div>
-          <div className="grid grid-cols-2 gap-5 flex-col justify-center pt-5">
+          <div className="grid grid-cols-3 gap-5 flex-col justify-center pt-5">
             <motion.a
                 href="https://github.com/MChandra111"
                 target="_blank"
@@ -95,9 +96,22 @@ export default function About() {
                 whileTap={{ scale: 0.95 }}
                 className="p-3 rounded-full"
                 style={{ backgroundColor: "#71AD9B", color: "#FFFFE7" }}
-              >
-                <GithubIcon size={35} color="white" />
-              </motion.a>
+            >
+              <GithubIcon size={35} color="white" />
+            </motion.a>
+
+            <motion.a
+              href="https://pdflink.to/1ddacf4f/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-3 rounded-full"
+              style={{ backgroundColor: "#71AD9B", color: "#FFFFE7" }}
+            >
+              <FileTextIcon size={35} color="white" />
+            </motion.a>
+
             <motion.a
               href="https://www.linkedin.com/in/maheshwar-chandra/"
               target="_blank"

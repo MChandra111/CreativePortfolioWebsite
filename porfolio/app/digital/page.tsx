@@ -4,8 +4,6 @@ import React, { useEffect, useState } from "react";
 import { Photo } from "@/lib/types";
 import Atom from "react-loading-indicators/Atom";
 import EnhancedCarousel from "@/components/enhancedcarousel";
-import { ArrowLeft } from "lucide-react";
-import { ArrowRight } from "lucide-react";
 
 const albums = [
   {

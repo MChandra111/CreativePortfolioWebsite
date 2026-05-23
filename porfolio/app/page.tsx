@@ -4,12 +4,17 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { Folder } from "lucide-react";
 import BorderGlow from '@/components/BorderGlow';
+import { Code } from "lucide-react";
+import { Camera } from "lucide-react";
+import { Music } from "lucide-react";
+import { Newspaper } from "lucide-react";
+
 
 const folders = [
-  { id: 1, label: "Software", color: "#71AD9B", href: "/software" },
-  { id: 2, label: "Photography", color: "#71AD9B", href: "/photography" },
-  { id: 3, label: "Music", color: "#71AD9B", href: "/music" },
-  { id: 4, label: "Blog", color: "#71AD9B", href: "/blog" },
+  { id: 1, label: <Code size={60}/>, color: "#71AD9B", href: "/software" },
+  { id: 2, label: <Camera size={60}/>, color: "#71AD9B", href: "/photography" },
+  { id: 3, label: <Music size={60}/>, color: "#71AD9B", href: "/music" },
+  { id: 4, label: <Newspaper size={60}/>, color: "#71AD9B", href: "/blog" },
 ];
 
 export default function Home() {

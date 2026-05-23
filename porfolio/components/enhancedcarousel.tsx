@@ -130,7 +130,7 @@ export default function EnhancedCarousel({ storiesData = defaultStoriesData }: C
           colors={['#c084fc', '#f472b6', '#38bdf8']}
         >
           <div style={{ padding: '2em' }}>
-            <p className="text-4xl font-bold text-[#FFFFE7]">Albums</p>
+            <p className="text-4xl font-bold text-[#FFFFE7]">Digital Albums</p>
           </div>
         </BorderGlow>
         </header>

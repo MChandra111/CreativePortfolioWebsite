@@ -139,6 +139,10 @@
     @apply min-h-screen overflow-y-visible;
   }
 
+  .scrolling-page-background {
+    @apply bg-[#FFFFE7] min-h-screen overflow-y-auto;
+  }
+
   ::-webkit-scrollbar {
     width: 5px;
   }
