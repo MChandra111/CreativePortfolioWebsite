@@ -13,9 +13,16 @@ const projects = [
     id: 1,
     name: "Portfolio Website",
     description: "A modern portfolio showcasing my work and skills.",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Figma"],
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Figma", "MongoDB", "Github Copilot"],
     href: "https://github.com/MChandra111/CreativePortfolioWebsite",
   },
+  {
+    id: 2,
+    name: "Fake News Detection",
+    description: "A machine learning model to identify and flag fake news articles.",
+    technologies: ["Python"],
+    href: "#",
+  }
 ];
 
 function ProjectCard({ project }: { project: typeof projects[0] }) {
@@ -24,7 +31,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
   return (
     <Link key={project.id} href={project.href} className="block">
     <motion.div
-      className="relative w-120 max-w-full bg-[#ffffde] rounded-2xl p-6 shadow-sm cursor-pointer"
+      className="relative w-130 max-w-full bg-[#ffffee] rounded-2xl p-6 shadow-sm cursor-pointer"
       style={{ borderColor: "#71AD9B", borderWidth: "1px" }}
       whileHover={{ x: 8 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}

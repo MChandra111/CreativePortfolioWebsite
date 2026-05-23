@@ -28,7 +28,7 @@ export default function MusicPage() {
           </BorderGlow>
         </div>
       </header>
-      <div className="grid grid-cols-1 gap-5 flex-col justify-items-center pt-5 pb-10">
+      <div className="grid grid-cols-1 gap-5 flex-col justify-items-center pb-10">
             <motion.a
                 href="https://www.youtube.com/@OrionMusic04"
                 target="_blank"
