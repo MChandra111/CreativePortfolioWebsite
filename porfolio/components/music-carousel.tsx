@@ -60,6 +60,111 @@ async function playAudioElement(audio: HTMLAudioElement, src: string): Promise<v
   await audio.play();
 }
 
+function formatTime(seconds: number): string {
+  if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${minutes}:${secs.toString().padStart(2, "0")}`;
+}
+
+function PlaybackProgress({
+  audio,
+  trackId,
+}: {
+  audio: HTMLAudioElement;
+  trackId: string;
+}) {
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isSeeking, setIsSeeking] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCurrentTime(0);
+    setDuration(0);
+  }, [trackId]);
+
+  useEffect(() => {
+    const syncDuration = () => {
+      if (Number.isFinite(audio.duration)) {
+        setDuration(audio.duration);
+      }
+    };
+
+    const onTimeUpdate = () => {
+      if (!isSeeking) {
+        setCurrentTime(audio.currentTime);
+      }
+    };
+
+    const onLoadStart = () => {
+      setCurrentTime(0);
+      setDuration(0);
+    };
+
+    const onEnded = () => {
+      setCurrentTime(0);
+    };
+
+    syncDuration();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCurrentTime(audio.currentTime);
+
+    audio.addEventListener("loadedmetadata", syncDuration);
+    audio.addEventListener("durationchange", syncDuration);
+    audio.addEventListener("timeupdate", onTimeUpdate);
+    audio.addEventListener("loadstart", onLoadStart);
+    audio.addEventListener("ended", onEnded);
+
+    return () => {
+      audio.removeEventListener("loadedmetadata", syncDuration);
+      audio.removeEventListener("durationchange", syncDuration);
+      audio.removeEventListener("timeupdate", onTimeUpdate);
+      audio.removeEventListener("loadstart", onLoadStart);
+      audio.removeEventListener("ended", onEnded);
+    };
+  }, [audio, isSeeking]);
+
+  const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
+
+  const handleSeek = (value: number) => {
+    if (!Number.isFinite(duration) || duration <= 0) return;
+    const nextTime = Math.min(Math.max(value, 0), duration);
+    setCurrentTime(nextTime);
+    // eslint-disable-next-line react-hooks/immutability
+    audio.currentTime = nextTime;
+  };
+
+  return (
+    <div className="shrink-0 space-y-2">
+      <input
+        type="range"
+        min={0}
+        max={duration || 0}
+        step={0.1}
+        value={currentTime}
+        disabled={duration <= 0}
+        onChange={(e) => handleSeek(Number(e.target.value))}
+        onPointerDown={() => setIsSeeking(true)}
+        onPointerUp={() => setIsSeeking(false)}
+        onPointerCancel={() => setIsSeeking(false)}
+        className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[#71AD9B]/25 accent-[#71AD9B] disabled:cursor-not-allowed disabled:opacity-50 [&::-moz-range-thumb]:h-3.5 [&::-moz-range-thumb]:w-3.5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-[#71AD9B] [&::-webkit-slider-thumb]:h-3.5 [&::-webkit-slider-thumb]:w-3.5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#71AD9B]"
+        style={{
+          background: `linear-gradient(to right, #71AD9B ${progressPercent}%, rgb(113 173 155 / 0.25) ${progressPercent}%)`,
+        }}
+        aria-label="Seek"
+        aria-valuemin={0}
+        aria-valuemax={duration || 0}
+        aria-valuenow={currentTime}
+      />
+      <div className="flex justify-between text-xs tabular-nums text-[#71AD9B]">
+        <span>{formatTime(currentTime)}</span>
+        <span>{formatTime(duration)}</span>
+      </div>
+    </div>
+  );
+}
+
 function AudioVisualizerPanel({
   audio,
   activeSong,
@@ -122,14 +227,12 @@ function AudioVisualizerPanel({
 
       <div
         ref={canvasContainerRef}
-        className="min-h-[280px] w-full min-w-0 flex-1 overflow-hidden rounded-xl"
+        className="min-h-70 w-full min-w-0 flex-1 overflow-hidden rounded-xl"
       >
         <canvas ref={canvasRef} className="block h-full w-full" aria-hidden />
       </div>
 
-      <p className="shrink-0 text-center text-xs text-[#71AD9B]/80">
-        Press play on a track to start the visualizer
-      </p>
+      <PlaybackProgress audio={audio} trackId={activeSong.id} />
     </div>
   );
 }
@@ -285,7 +388,7 @@ export default function MusicCarousel({ songs = defaultSongs }: MusicCarouselPro
 
           <div
             ref={listRef}
-            className="scrollbar-thin flex h-[min(68vh,520px)] flex-col gap-3 overflow-y-auto scroll-smooth px-1 py-10 [scrollbar-color:#71AD9B_transparent] [scrollbar-width:thin]"
+            className="scrollbar-thin flex h-[min(68vh,520px)] flex-col gap-3 overflow-y-auto scroll-smooth px-1 py-10 [scrollbar-color:#71AD9B_transparent]"
             style={{ scrollSnapType: "y mandatory" }}
           >
             {songs.toReversed().map((song) => {

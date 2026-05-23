@@ -10,7 +10,7 @@ export default function MusicPage() {
   return (
     <main className="page-background mx-auto max-w-7xl px-6 pb-16 pt-24">
       <header className="mb-10 w-full text-center">
-        <div className="mx-auto max-w-lg">
+        <div className="mx-auto max-w-md">
           <BorderGlow
             edgeSensitivity={5}
             glowColor="40 80 80"
@@ -23,7 +23,7 @@ export default function MusicPage() {
             colors={["#c084fc", "#f472b6", "#38bdf8"]}
           >
             <div className="p-8">
-              <h1 className="text-4xl font-bold text-[#FFFFE7]">Music</h1>
+              <h1 className="text-4xl font-bold text-[#FFFFE7]">My Music</h1>
             </div>
           </BorderGlow>
         </div>
