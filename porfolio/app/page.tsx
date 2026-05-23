@@ -37,15 +37,32 @@ export default function Home() {
           </div>
         </BorderGlow>
       </div>
-      <div className="grid grid-cols-2 gap-16">
-        {folders.map((folder) => (
+      <motion.div
+        className="grid grid-cols-2 gap-16"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
+      >
+        {folders.map((folder, index) => (
           <Link key={folder.id} href={folder.href} className="block">
           <motion.div
-            key={folder.id}
             className="relative cursor-pointer"
-            whileHover={{ scale: 1.1, y: -8 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 300, damping: 10 }}
+            initial={{ opacity: 0, y: 36 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.55,
+              delay: index * 0.12,
+              ease: "easeOut",
+            }}
+            whileHover={{
+              scale: 1.1,
+              y: -8,
+              transition: { type: "spring", stiffness: 300, damping: 10 },
+            }}
+            whileTap={{
+              scale: 0.95,
+              transition: { type: "spring", stiffness: 300, damping: 10 },
+            }}
           >
             <Folder
               size={300}
@@ -59,7 +76,7 @@ export default function Home() {
           </motion.div>
           </Link>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
