@@ -31,15 +31,15 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
   return (
     <Link key={project.id} href={project.href} className="block">
     <motion.div
-      className="relative w-130 max-w-full bg-[#ffffee] rounded-2xl p-6 shadow-sm cursor-pointer"
-      style={{ borderColor: "#71AD9B", borderWidth: "1px" }}
+      className="relative w-130 max-w-full bg-[#fcfcfe] rounded-2xl p-6 shadow-sm cursor-pointer"
+      style={{ borderColor: "#475569", borderWidth: "2px" }}
       whileHover={{ x: 8 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onHoverStart={() => setShowTech(true)}
       onHoverEnd={() => setShowTech(false)}
     >
-      <h3 className="mb-2 text-xl text-[#71AD9B] font-bold grid grid-cols-2">{project.name} ⧉</h3>
-      <p className="text-md text-[#71AD9B]">{project.description}</p>
+      <h3 className="mb-2 text-xl text-[#334155] font-bold grid grid-cols-2">{project.name} ⧉</h3>
+      <p className="text-md text-[#475569]">{project.description}</p>
 
       {showTech && (
         <motion.div
@@ -51,15 +51,15 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
             ease: [0.4, 0.0, 0.2, 1]
           }}
           className="absolute left-full ml-6 top-1/2 -translate-y-1/2 bg-white rounded-xl p-4 shadow-lg z-10"
-          style={{ borderColor: "#71AD9B", borderWidth: "1px", minWidth: "200px" }}
+          style={{ borderColor: "#334155", borderWidth: "1px", minWidth: "200px" }}
         >
-          <p className="text-sm mb-3 text-[#71AD9B]">Technologies & Skills</p>
+          <p className="text-sm mb-3 text-[#475569]">Technologies & Skills</p>
           <div className="flex flex-col gap-2">
             {project.technologies.map((tech, index) => (
               <span
                 key={index}
-                className="px-3 py-1.5 rounded-full text-xs text-[#FFFFE7] text-center"
-                style={{ backgroundColor: "#71AD9B" }}
+                className="px-3 py-1.5 rounded-full text-xs text-[#F9FAFB] text-center"
+                style={{ backgroundColor: "#475569" }}
               >
                 {tech}
               </span>
@@ -74,12 +74,12 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
 
 export default function About() {
   return (
-    <div className="page-background min-h-screen size-full flex flex-col items-center bg-linear-to-br from-[#FFFCBB] to-[#FFFFE7]">
+    <div className="page-background min-h-screen size-full flex flex-col items-center">
       <div className="text-center pt-15 pb-5 padding">
         <BorderGlow
           edgeSensitivity={5}
           glowColor="40 80 80"
-          backgroundColor="#71AD9B"
+          backgroundColor="#334155"
           borderRadius={20}
           glowRadius={40}
           glowIntensity={1}
@@ -88,7 +88,7 @@ export default function About() {
           colors={['#c084fc', '#f472b6', '#38bdf8']}
         >
         <div style={{ padding: '1.5em' }}>
-        <h1 className="text-4xl font-bold text-[#FFFFE7]">
+        <h1 className="text-4xl font-bold text-[#F9FAFB]">
           Software Projects
         </h1>
         </div>
@@ -102,7 +102,7 @@ export default function About() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-3 rounded-full"
-                style={{ backgroundColor: "#71AD9B", color: "#FFFFE7" }}
+                style={{ backgroundColor: "#334155", color: "#F9FAFB" }}
             >
               <GithubIcon size={35} color="white" />
             </motion.a>
@@ -114,7 +114,7 @@ export default function About() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className="p-3 rounded-full"
-              style={{ backgroundColor: "#71AD9B", color: "#FFFFE7" }}
+              style={{ backgroundColor: "#334155", color: "#F9FAFB" }}
             >
               <FileTextIcon size={35} color="white" />
             </motion.a>
@@ -126,7 +126,7 @@ export default function About() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className="p-3 rounded-full"
-              style={{ backgroundColor: "#71AD9B", color: "#FFFFE7" }}
+              style={{ backgroundColor: "#334155", color: "#F9FAFB" }}
             >
               <LinkedinIcon size={35} color="white" />
             </motion.a>

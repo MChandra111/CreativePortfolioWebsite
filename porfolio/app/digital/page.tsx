@@ -102,9 +102,9 @@ export default function DigitalPage() {
             }))}
         />
       </div>
-      <div className="mx-100 justify-items-start bg-[#71AD9B] rounded-2xl">
-        <h2 className="text-4xl font-bold text-[#FFFFE7] pt-5 pl-5">Gear</h2>
-        <p className="text-[#FFFFE7] text-lg p-5">
+      <div className="mx-100 justify-items-start bg-[#334155] rounded-2xl">
+        <h2 className="text-4xl font-bold text-[#F9FAFB] pt-5 pl-5">Gear</h2>
+        <p className="text-[#F9FAFB] text-lg p-5">
           Camera: Canon Rebel T7<br />
           Lens: Canon EF-S 18-55mm f/3.5-5.6 IS II<br />
           Lens: Canon EF 50mm f/1.8 STM<br />

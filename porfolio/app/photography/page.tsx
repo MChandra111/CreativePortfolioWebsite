@@ -40,7 +40,7 @@ export default function Photo() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-3 rounded-full"
-                style={{ backgroundColor: "#71AD9B", color: "#FFFFE7" }}
+                style={{ backgroundColor: "#334155", color: "#F9FAFB" }}
               >
                 <InstagramIcon size={40} color="white" />
               </motion.a>
@@ -67,10 +67,10 @@ export default function Photo() {
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="absolute inset-0 bg-[#502419]/60 flex items-center justify-center"
+                className="absolute inset-0 bg-[#334155]/60 flex items-center justify-center"
               >
                 <p
-                  className="text-[#FFFFE7] text-3xl font-bold px-4 h-full flex items-center justify-center"
+                  className="text-[#F9FAFB] text-3xl font-bold px-4 h-full flex items-center justify-center"
                   style={{ writingMode: "vertical-rl", textOrientation: "upright" }}
                 >
                   {p.title}

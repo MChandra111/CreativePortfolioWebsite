@@ -148,16 +148,16 @@ function PlaybackProgress({
         onPointerDown={() => setIsSeeking(true)}
         onPointerUp={() => setIsSeeking(false)}
         onPointerCancel={() => setIsSeeking(false)}
-        className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[#71AD9B]/25 accent-[#71AD9B] disabled:cursor-not-allowed disabled:opacity-50 [&::-moz-range-thumb]:h-3.5 [&::-moz-range-thumb]:w-3.5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-[#71AD9B] [&::-webkit-slider-thumb]:h-3.5 [&::-webkit-slider-thumb]:w-3.5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#71AD9B]"
+        className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[#334155]/25 accent-[#334155] disabled:cursor-not-allowed disabled:opacity-50 [&::-moz-range-thumb]:h-3.5 [&::-moz-range-thumb]:w-3.5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-[#334155] [&::-webkit-slider-thumb]:h-3.5 [&::-webkit-slider-thumb]:w-3.5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#334155]"
         style={{
-          background: `linear-gradient(to right, #71AD9B ${progressPercent}%, rgb(113 173 155 / 0.25) ${progressPercent}%)`,
+          background: `linear-gradient(to right, #334155 ${progressPercent}%, rgb(51 65 85 / 0.25) ${progressPercent}%)`,
         }}
         aria-label="Seek"
         aria-valuemin={0}
         aria-valuemax={duration || 0}
         aria-valuenow={currentTime}
       />
-      <div className="flex justify-between text-xs tabular-nums text-[#71AD9B]">
+      <div className="flex justify-between text-xs tabular-nums text-[#334155]">
         <span>{formatTime(currentTime)}</span>
         <span>{formatTime(duration)}</span>
       </div>
@@ -180,7 +180,7 @@ function AudioVisualizerPanel({
   const { canvasRef, start, stop } = useAudioVisualizer({
     source: audio,
     mode: "frequency-dots",
-    barColor: "#71AD9B",
+    barColor: "#334155",
     backgroundColor: "transparent",
   });
 
@@ -211,15 +211,15 @@ function AudioVisualizerPanel({
   }, [canvasRef]);
 
   return (
-    <div className="flex h-full min-h-[min(68vh,520px)] flex-col gap-4 overflow-hidden rounded-2xl border border-[#71AD9B]/30 bg-[#ffffde]/60 p-6 md:p-8">
+    <div className="flex h-full min-h-[min(68vh,520px)] flex-col gap-4 overflow-hidden rounded-2xl border border-[#334155]/30 bg-[#e8e8e8] p-6 md:p-8">
       <div className="shrink-0">
-        <p className="text-sm font-medium uppercase tracking-wide text-[#71AD9B]">
+        <p className="text-sm font-medium uppercase tracking-wide text-[#334155]">
           {isPlaying ? "Now playing" : "Selected"}
         </p>
-        <h2 className="mt-1 text-2xl font-bold text-[#502419] md:text-3xl">
+        <h2 className="mt-1 text-2xl font-bold text-[#334155] md:text-3xl">
           {activeSong.title}
         </h2>
-        <p className="mt-1 text-[#71AD9B]">
+        <p className="mt-1 text-[#334155]">
           {activeSong.artist}
           {activeSong.duration ? ` · ${activeSong.duration}` : ""}
         </p>
@@ -369,8 +369,8 @@ export default function MusicCarousel({ songs = defaultSongs }: MusicCarouselPro
             />
           </div>
         ) : (
-          <div className="flex min-h-[min(68vh,520px)] items-center justify-center rounded-2xl border border-[#71AD9B]/30 bg-[#ffffde]/60 p-8">
-            <p className="text-[#71AD9B]">Loading player…</p>
+          <div className="flex min-h-[min(68vh,520px)] items-center justify-center rounded-2xl border border-[#334155]/30 bg-[#F3F4F6]/60 p-8">
+            <p className="text-[#334155]">Loading player…</p>
           </div>
         )}
       </section>
@@ -380,7 +380,7 @@ export default function MusicCarousel({ songs = defaultSongs }: MusicCarouselPro
           <button
             type="button"
             onClick={() => scrollBy("up")}
-            className="absolute -top-2 left-1/2 z-10 -translate-x-1/2 rounded-full bg-[#71AD9B]/20 p-1.5 text-[#71AD9B] transition-colors hover:bg-[#71AD9B]/35"
+            className="absolute -top-2 left-1/2 z-10 -translate-x-1/2 rounded-full bg-[#334155]/20 p-1.5 text-[#334155] transition-colors hover:bg-[#334155]/35"
             aria-label="Scroll up"
           >
             <ChevronUp size={22} />
@@ -388,7 +388,7 @@ export default function MusicCarousel({ songs = defaultSongs }: MusicCarouselPro
 
           <div
             ref={listRef}
-            className="scrollbar-thin flex h-[min(68vh,520px)] flex-col gap-3 overflow-y-auto scroll-smooth px-1 py-10 [scrollbar-color:#71AD9B_transparent]"
+            className="scrollbar-thin flex h-[min(68vh,600px)] flex-col gap-3 overflow-y-auto scroll-smooth px-1 py-10 [scrollbar-color:#334155_transparent]"
             style={{ scrollSnapType: "y mandatory" }}
           >
             {songs.toReversed().map((song) => {
@@ -409,10 +409,10 @@ export default function MusicCarousel({ songs = defaultSongs }: MusicCarouselPro
                     opacity: isActive ? 1 : 0.72,
                   }}
                   transition={{ type: "spring", stiffness: 400, damping: 28 }}
-                  className={`flex w-full shrink-0 snap-center items-center gap-3 rounded-2xl border px-3 py-3 transition-colors ${
+                  className={`flex w-full shrink-0 snap-center items-center gap-3 rounded-2xl border-2 px-3 py-3 transition-colors ${
                     isActive
-                      ? "border-[#71AD9B] bg-[#ffffde] shadow-md"
-                      : "border-[#71AD9B]/25 bg-[#FFFFE7]/80 hover:border-[#71AD9B]/50"
+                      ? "border-[#334155] bg-[#F9FAFB] shadow-md"
+                      : "border-[#334155]/25 bg-[#F9FAFB]/80 hover:border-[#334155]/50"
                   }`}
                   style={{ scrollSnapAlign: "center" }}
                 >
@@ -422,7 +422,7 @@ export default function MusicCarousel({ songs = defaultSongs }: MusicCarouselPro
                     className="flex min-w-0 flex-1 items-center gap-3 text-left"
                   >
                     <span
-                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-xs font-bold text-[#FFFFE7]"
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-xs font-bold text-[#F9FAFB]"
                       style={{
                         background: isActive
                           ? "linear-gradient(135deg, #71AD9B, #502419)"
@@ -434,10 +434,10 @@ export default function MusicCarousel({ songs = defaultSongs }: MusicCarouselPro
                     </span>
 
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-base font-semibold text-[#502419]">
+                      <span className="block truncate text-base font-semibold text-[#334155]">
                         {song.title}
                       </span>
-                      <span className="block truncate text-xs text-[#71AD9B]">
+                      <span className="block truncate text-xs text-[#334155]">
                         {song.artist}
                       </span>
                     </span>
@@ -446,7 +446,7 @@ export default function MusicCarousel({ songs = defaultSongs }: MusicCarouselPro
                   <button
                     type="button"
                     onClick={() => void togglePlay(song)}
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#71AD9B] text-[#FFFFE7] transition-transform hover:scale-105 active:scale-95"
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#334155] text-[#F9FAFB] transition-transform hover:scale-105 active:scale-95"
                     aria-label={showPause ? `Pause ${song.title}` : `Play ${song.title}`}
                   >
                     {showPause ? (
@@ -463,7 +463,7 @@ export default function MusicCarousel({ songs = defaultSongs }: MusicCarouselPro
           <button
             type="button"
             onClick={() => scrollBy("down")}
-            className="absolute -bottom-2 left-1/2 z-10 -translate-x-1/2 rounded-full bg-[#71AD9B]/20 p-1.5 text-[#71AD9B] transition-colors hover:bg-[#71AD9B]/35"
+            className="absolute -bottom-2 left-1/2 z-10 -translate-x-1/2 rounded-full bg-[#334155]/20 p-1.5 text-[#334155] transition-colors hover:bg-[#334155]/35"
             aria-label="Scroll down"
           >
             <ChevronDown size={22} />

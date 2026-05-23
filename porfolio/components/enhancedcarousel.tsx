@@ -117,11 +117,11 @@ export default function EnhancedCarousel({ storiesData = defaultStoriesData }: C
 
   return (
     <div className="font-sans w-full py-12 md:py-20 flex flex-col items-center justify-center">
-        <header className="w-120 text-center mb-12">
+        <header className="w-120 text-center mb-12 cursor-default">
           <BorderGlow
           edgeSensitivity={5}
           glowColor="40 80 80"
-          backgroundColor="#71AD9B"
+          backgroundColor="#334155"
           borderRadius={20}
           glowRadius={40}
           glowIntensity={1}
@@ -130,7 +130,7 @@ export default function EnhancedCarousel({ storiesData = defaultStoriesData }: C
           colors={['#c084fc', '#f472b6', '#38bdf8']}
         >
           <div style={{ padding: '2em' }}>
-            <p className="text-4xl font-bold text-[#FFFFE7]">Digital Albums</p>
+            <p className="text-4xl font-bold text-[#F9FAFB]">Digital Albums</p>
           </div>
         </BorderGlow>
         </header>
@@ -157,9 +157,9 @@ export default function EnhancedCarousel({ storiesData = defaultStoriesData }: C
           </motion.div>
         </motion.div>
         <div className="flex justify-center">
-          <ArrowLeft size={30} color="#71AD9B" className="" />
-           <Mouse size={30} color="#71AD9B" className="mx-4" />
-          <ArrowRight size={30} color="#71AD9B" className="" />
+          <ArrowLeft size={30} color="#334155" className="" />
+           <Mouse size={30} color="#334155" className="mx-4" />
+          <ArrowRight size={30} color="#334155" className="" />
         </div>
       </div>
     </div>

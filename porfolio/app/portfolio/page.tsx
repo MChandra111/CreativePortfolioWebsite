@@ -37,8 +37,7 @@ export default function PortfolioPage() {
 
   return (
     <main className="scrolling-page-background mx-auto justify-items-center-safe mt-10 px-6 pb-16">
-      <h1 className="text-4xl font-bold mb-6">Photography Portfolio</h1>
-      
+
       <div className="flex gap-6">
 
         <Masonary items={photos
