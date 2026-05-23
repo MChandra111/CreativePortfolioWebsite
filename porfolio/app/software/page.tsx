@@ -31,7 +31,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
       onHoverStart={() => setShowTech(true)}
       onHoverEnd={() => setShowTech(false)}
     >
-      <h3 className="mb-2 text-xl text-[#71AD9B] font-bold">{project.name}</h3>
+      <h3 className="mb-2 text-xl text-[#71AD9B] font-bold grid grid-cols-2">{project.name} ⧉</h3>
       <p className="text-md text-[#71AD9B]">{project.description}</p>
 
       {showTech && (

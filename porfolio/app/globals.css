@@ -140,7 +140,7 @@
   }
 
   .scrolling-page-background {
-    @apply bg-[#FFFFE7] min-h-screen overflow-y-auto;
+    @apply bg-[#ffffd6] min-h-screen overflow-y-auto;
   }
 
   ::-webkit-scrollbar {

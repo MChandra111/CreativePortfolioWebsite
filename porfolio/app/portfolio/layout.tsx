@@ -10,7 +10,7 @@ export default function PortfolioLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative min-h-screen">
+    <div className="scrolling-page-background relative min-h-screen">
       <Link href="/photography" className="absolute top-6 left-6 p-2 rounded-lg">
         <motion.div
           className="relative p-6 cursor-pointer text-[#502419] hover:text-[#EE964B] transition-colors duration-30"

@@ -10,7 +10,6 @@ import Lightbox from "yet-another-react-lightbox";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
-import { MapPin } from "lucide-react";
 
 const breakpointColumnsObj = {
   default: 2,
@@ -85,7 +84,7 @@ export default function FilmPage() {
 
   return (
     <main className="page-background mx-auto mt-10 max-w-7xl px-6 pb-24">
-      <h1 className="mb-6 text-4xl font-bold">Film Photography</h1>
+
 
       <Lightbox
         open={lightboxIndex >= 0}

@@ -57,6 +57,7 @@ const albums = [
 ];
 
 export default function DigitalPage() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(true);
 
