@@ -3,7 +3,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Digital from "./_MG_6294.jpg";
+import Digital from "./digital.jpg";
+import Film from "./film.jpg";
+import Portfolio from "./portfolio.jpg";
 import { InstagramIcon } from "@/components/ui/instagram";
 
 const photos = [
@@ -16,13 +18,13 @@ const photos = [
   {
     id: 2,
     title: "PORTFOLIO",
-    src: Digital,
+    src: Portfolio,
     href: "/portfolio",
   },
   {
     id: 3,
     title: "FILM",
-    src: Digital,
+    src: Film,
     href: "/film",
   },
 ];
