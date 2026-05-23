@@ -10,7 +10,7 @@ const albums = [
     id: 1,
     imageUrl: "https://i.pinimg.com/736x/d6/8a/12/d68a121e960094f99ad8acd37505fb7d.jpg",
     title: "Colorado 2026",
-    year: "2026",
+    album: "colorado26",
     tags: ["Nature", "Landscape"],
     href: "/photos/colorado-2026"
   },
@@ -18,7 +18,7 @@ const albums = [
     id: 2,
     imageUrl: "https://i.pinimg.com/736x/21/16/f7/2116f71f9d51d875e44d809f074ff079.jpg",
     title: "2025-2026 Miscellaneous",
-    year: "2025",
+    album: "misc2526",
     tags: ["Nature", "Landscape"],
     href: "/photos/los-cabos-2025"
   },
@@ -26,7 +26,7 @@ const albums = [
     id: 3,
     imageUrl: "https://i.pinimg.com/736x/21/16/f7/2116f71f9d51d875e44d809f074ff079.jpg",
     title: "Los Cabos 2025",
-    year: "2025",
+    album: "loscabos25",
     tags: ["Nature", "Landscape"],
     href: "/photos/los-cabos-2025"
   },
@@ -34,7 +34,7 @@ const albums = [
     id: 4,
     imageUrl: "https://i.pinimg.com/1200x/fe/c2/0d/fec20d2958059b8463bffb138d4eaac6.jpg",
     title: "South Korea 2025",
-    year: "2025",
+    album: "korea25",
     tags: ["Nature", "Landscape"],
     href: "/photos/south-korea-2025"
   },
@@ -42,7 +42,7 @@ const albums = [
     id: 5,
     imageUrl: "https://i.pinimg.com/736x/84/dc/62/84dc62de850a34a9d420c97f3a2d58f4.jpg",
     title: "Japan 2025",
-    year: "2025",
+    album: "japan25",
     tags: ["Nature", "Landscape"],
     href: "/photos/japan-2025"
   },
@@ -50,7 +50,7 @@ const albums = [
     id: 6,
     imageUrl: "https://i.pinimg.com/1200x/be/c3/7e/bec37e2c43e703f922f887db2578ce2e.jpg",
     title: "2024-2025 Miscellaneous",
-    year: "2024",
+    album: "misc2425",
     tags: ["Nature", "Landscape"],
     href: "/photos/iceland-2024"
   }
@@ -96,7 +96,7 @@ export default function DigitalPage() {
               id: idx,
               title: p.title,
               imageUrl: p.imageUrl,
-              year: p.year,
+              album: p.album,
               tags: p.tags || [],
               href: p.href,
             }))}

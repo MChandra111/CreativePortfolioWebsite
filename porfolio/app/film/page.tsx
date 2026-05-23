@@ -92,9 +92,9 @@ export default function FilmPage() {
         plugins={[Captions]}
         captions={{ showToggle: false }}
         styles={{
-          container: { backgroundColor: "#FFFFE7" },
+          container: { backgroundColor: "#F9FAFB" },
           captionsDescription: { color: "white", fontSize: "18px", justifyContent: "center", fontWeight: "bold" },
-          captionsTitle: { color: "#71AD9B", fontSize: "25px", fontWeight: "bold", paddingLeft: "50px", paddingTop: "30px" },
+          captionsTitle: { color: "#334155", fontSize: "25px", fontWeight: "bold", paddingLeft: "50px", paddingTop: "30px" },
           captionsTitleContainer: { alignItems: "center", background: "transparent" },
         }}
         close={() => setLightboxIndex(-1)}
