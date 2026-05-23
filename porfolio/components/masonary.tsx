@@ -99,7 +99,7 @@ const GridItem: React.FC<GridItemProps> = ({ item }) => {
 const MasonryGrid: React.FC<MasonryGridProps> = ({ items }) => {
   return (
     <div
-      className="columns-1 gap-6 sm:columns-2 lg:columns-3 xl:columns-4"
+      className="columns-3 gap-6"
       style={{ columnWidth: '280px' }}
     >
       {items.map((item) => (
