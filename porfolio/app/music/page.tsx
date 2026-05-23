@@ -35,13 +35,26 @@ export default function MusicPage() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 36 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.55,
+                  delay: 0,
+                  ease: "easeOut",
+                }}
                 className="p-3 rounded-full"
                 style={{ backgroundColor: "#334155", color: "#F9FAFB" }}
               >
                 <YoutubeIcon size={40} color="white" />
               </motion.a>
         </div>
-      <MusicCarousel />
+      <motion.div
+        initial={{ opacity: 0, y: 36 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.55, delay: 0.08, ease: "easeOut" }}
+      >
+        <MusicCarousel />
+      </motion.div>
     </main>
   );
 }

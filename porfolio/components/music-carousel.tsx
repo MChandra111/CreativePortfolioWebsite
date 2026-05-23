@@ -425,8 +425,8 @@ export default function MusicCarousel({ songs = defaultSongs }: MusicCarouselPro
                       className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-xs font-bold text-[#F9FAFB]"
                       style={{
                         background: isActive
-                          ? "linear-gradient(135deg, #71AD9B, #502419)"
-                          : "linear-gradient(135deg, #71AD9B99, #71AD9B)",
+                          ? "linear-gradient(135deg, #00008099, #475569)"
+                          : "linear-gradient(135deg, #33415599, #475569)",
                       }}
                       aria-hidden
                     >

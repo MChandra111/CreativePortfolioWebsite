@@ -39,20 +39,41 @@ export default function Photo() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 36 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.55,
+                  delay: 0,
+                  ease: "easeOut",
+                }}
                 className="p-3 rounded-full"
                 style={{ backgroundColor: "#334155", color: "#F9FAFB" }}
               >
                 <InstagramIcon size={40} color="white" />
               </motion.a>
         </div>
-      <div className="grid grid-cols-3 gap-20">
-        {photos.map((p) => (
+      <motion.div
+        className="grid grid-cols-3 gap-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
+      >
+        {photos.map((p, index) => (
           <motion.a
             key={p.id}
             href={p.href}
-            whileHover={{ y: -20 }}
+            initial={{ opacity: 0, y: 36 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.55,
+              delay: index * 0.12,
+              ease: "easeOut",
+            }}
+            whileHover={{
+              y: -20,
+              transition: { type: "spring", stiffness: 300, damping: 24 },
+            }}
             whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 300, damping: 24 }}
             className="group block overflow-hidden rounded-xl shadow-lg bg-white/5"
           >
             <div className="relative h-200 max-h-fit w-100 bg-transparent">
@@ -79,7 +100,7 @@ export default function Photo() {
             </div>
           </motion.a>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

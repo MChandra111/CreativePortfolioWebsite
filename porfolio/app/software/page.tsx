@@ -25,7 +25,7 @@ const projects = [
   }
 ];
 
-function ProjectCard({ project }: { project: typeof projects[0] }) {
+function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
   const [showTech, setShowTech] = useState(false);
 
   return (
@@ -33,8 +33,17 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
     <motion.div
       className="relative w-130 max-w-full bg-[#fcfcfe] rounded-2xl p-6 shadow-sm cursor-pointer"
       style={{ borderColor: "#475569", borderWidth: "2px" }}
-      whileHover={{ x: 8 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      initial={{ opacity: 0, y: 36 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.12,
+        ease: "easeOut",
+      }}
+      whileHover={{
+        x: 8,
+        transition: { type: "spring", stiffness: 300, damping: 20 },
+      }}
       onHoverStart={() => setShowTech(true)}
       onHoverEnd={() => setShowTech(false)}
     >
@@ -75,7 +84,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
 export default function About() {
   return (
     <div className="page-background min-h-screen size-full flex flex-col items-center">
-      <div className="text-center pt-15 pb-5 padding">
+      <div className="text-center pt-15 pb-5 padding cursor-default">
         <BorderGlow
           edgeSensitivity={5}
           glowColor="40 80 80"
@@ -101,6 +110,13 @@ export default function About() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 36 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.55,
+                  delay: 1 * 0.12,
+                  ease: "easeOut",
+                }}
                 className="p-3 rounded-full"
                 style={{ backgroundColor: "#334155", color: "#F9FAFB" }}
             >
@@ -113,6 +129,13 @@ export default function About() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 36 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.55,
+                  delay: 2 * 0.12,
+                  ease: "easeOut",
+                }}
               className="p-3 rounded-full"
               style={{ backgroundColor: "#334155", color: "#F9FAFB" }}
             >
@@ -125,6 +148,13 @@ export default function About() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 36 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.55,
+                  delay: 3 * 0.12,
+                  ease: "easeOut",
+                }}
               className="p-3 rounded-full"
               style={{ backgroundColor: "#334155", color: "#F9FAFB" }}
             >
@@ -132,11 +162,16 @@ export default function About() {
             </motion.a>
           </div>
 
-      <div className="max-w-3xl mx-auto flex flex-col gap-6 pt-10">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+      <motion.div
+        className="max-w-3xl mx-auto flex flex-col gap-6 pt-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
+      >
+          {projects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
-        </div>
+        </motion.div>
     </div>
   );
 }
