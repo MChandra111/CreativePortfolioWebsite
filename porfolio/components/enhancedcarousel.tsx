@@ -86,13 +86,15 @@ const StoryCard = ({ story, index }: { story: Story; index: number }) => {
         delay: index * 0.12,
         ease: "easeOut",
       }}
-      whileHover={{ y: -8, transition: { type: "spring", stiffness: 300 } }}
+      whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 24 } }}
     >
       <Image
         src={story.imageUrl}
         alt={story.title}
         fill
+        sizes={"full"}
         className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 pointer-events-none"
+        loading="eager"
       />
       <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
       <div className="relative z-10 flex flex-col justify-end h-full p-6 text-white">
