@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 // --- TypeScript Interfaces ---
 interface MasonryItem {
-  id: number;
+  id: string | number;
   imageUrl: string;
   title: string;
 }
@@ -50,6 +50,7 @@ const initialItems = [
 const GridItem: React.FC<GridItemProps> = ({ item }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isHovered, setIsHovered] = useState(false);
+  const [imageReady, setImageReady] = useState(false);
 
   return (
     <motion.div
@@ -59,19 +60,31 @@ const GridItem: React.FC<GridItemProps> = ({ item }) => {
       whileHover={{ y: -5 }}
       transition={{ type: 'spring', stiffness: 300 }}
     >
-      <Image
-        width={0}
-        height={0}
-        sizes="100vw"
-        src={item.imageUrl}
-        alt={item.title}
-        className="w-full h-auto rounded-xl shadow-lg"
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          target.onerror = null;
-          target.src = `https://placehold.co/400x300/fecaca/333333?text=Image+Not+Found`;
-        }}
-      />
+      <div className="relative overflow-hidden rounded-xl bg-[#e2e8f0]">
+        {!imageReady && (
+          <div
+            className="w-full min-h-[200px] animate-pulse rounded-xl bg-[#cbd5e1]"
+            aria-hidden
+          />
+        )}
+        <Image
+          width={800}
+          height={600}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          src={item.imageUrl}
+          alt={item.title}
+          className={`w-full h-auto rounded-xl shadow-lg transition-opacity duration-300 ${
+            imageReady ? "opacity-100" : "absolute inset-0 opacity-0"
+          }`}
+          onLoad={() => setImageReady(true)}
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.onerror = null;
+            target.src = `https://placehold.co/400x300/fecaca/333333?text=Image+Not+Found`;
+            setImageReady(true);
+          }}
+        />
+      </div>
       {/* <AnimatePresence>
         {isHovered && (
           <motion.div

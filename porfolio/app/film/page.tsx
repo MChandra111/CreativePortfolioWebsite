@@ -59,7 +59,7 @@ export default function FilmPage() {
   useEffect(() => {
     async function fetchPhotos() {
       try {
-        const res = await fetch("/api/photos?category=film");
+        const res = await fetch("/api/photos?category=Film");
         const data = await res.json();
         setPhotos(data);
       } catch (error) {
@@ -93,16 +93,16 @@ export default function FilmPage() {
         captions={{ showToggle: false }}
         styles={{
           container: { backgroundColor: "#F9FAFB" },
-          captionsDescription: { color: "white", fontSize: "18px", justifyContent: "center", fontWeight: "bold" },
-          captionsTitle: { color: "#334155", fontSize: "25px", fontWeight: "bold", paddingLeft: "50px", paddingTop: "30px" },
+          captionsDescription: { color: "334155", fontSize: "25px", justifyContent: "center", fontWeight: "bold" },
+          captionsTitle: { color: "#334155", fontSize: "25px", fontWeight: "bold" },
           captionsTitleContainer: { alignItems: "center", background: "transparent" },
         }}
         close={() => setLightboxIndex(-1)}
         slides={photos.map((p) => ({
           src: p.src,
           alt: p.title,
-          title: "📍 " + p.location,
-          description: p.date ? new Date(p.date).toLocaleDateString("en-US") : undefined,
+          title: p.date ? new Date(p.date).toLocaleDateString("en-US") : undefined,
+          description: p.location,
         }))}
       />
 

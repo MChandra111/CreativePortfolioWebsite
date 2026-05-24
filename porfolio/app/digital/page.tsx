@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { Photo } from "@/lib/types";
 import Atom from "react-loading-indicators/Atom";
 import EnhancedCarousel from "@/components/enhancedcarousel";
+import AlbumGalleryOverlay from "@/components/album-gallery-overlay";
+import type { Story } from "@/components/enhancedcarousel";
 
 const albums = [
   {
@@ -50,14 +52,22 @@ const albums = [
 ];
 
 export default function DigitalPage() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedAlbum, setSelectedAlbum] = useState<{
+    album: string;
+    title: string;
+  } | null>(null);
+
+  const handleAlbumClick = (story: Story) => {
+    if (!story.album) return;
+    setSelectedAlbum({ album: story.album, title: story.title });
+  };
 
   useEffect(() => {
     async function fetchPhotos() {
       try {
-        const res = await fetch("/api/photos?category=digital");
+        const res = await fetch("/api/photos?category=Digital");
         const data = await res.json();
         setPhotos(data);
       } catch (error) {
@@ -93,8 +103,20 @@ export default function DigitalPage() {
               tags: p.tags || [],
               href: p.href,
             }))}
+          onAlbumClick={handleAlbumClick}
         />
       </div>
+
+      {selectedAlbum && (
+        <AlbumGalleryOverlay
+          key={selectedAlbum.album}
+          album={selectedAlbum.album}
+          title={selectedAlbum.title}
+          category="Digital"
+          photos={photos.filter((p) => p.album === selectedAlbum.album)}
+          onClose={() => setSelectedAlbum(null)}
+        />
+      )}
       <motion.div
         className="mx-100 justify-items-start bg-[#334155] rounded-2xl"
         initial={{ opacity: 0, y: 36 }}

@@ -5,10 +5,11 @@ import Image from "next/image";
 import BorderGlow from "@/components/BorderGlow";
 import { ArrowLeft, ArrowRight, Mouse } from "lucide-react";
 
-interface Story {
+export interface Story {
   id: number;
   imageUrl: string;
   title: string;
+  album?: string;
   year?: string;
   tags?: string[];
   href?: string;
@@ -16,6 +17,7 @@ interface Story {
 
 interface CardProps {
   storiesData?: Story[];
+  onAlbumClick?: (story: Story) => void;
 }
 
 const defaultStoriesData: Story[] = [
@@ -75,10 +77,19 @@ const defaultStoriesData: Story[] = [
   },
 ];
 
-const StoryCard = ({ story, index }: { story: Story; index: number }) => {
+const StoryCard = ({
+  story,
+  index,
+  onAlbumClick,
+}: {
+  story: Story;
+  index: number;
+  onAlbumClick?: (story: Story) => void;
+}) => {
   return (
-    <motion.div
-      className="relative w-72 h-96 shrink-0 rounded-lg overflow-hidden shadow-xl group"
+    <motion.button
+      type="button"
+      className="relative h-96 w-72 shrink-0 overflow-hidden rounded-lg shadow-xl group text-left"
       initial={{ opacity: 0, y: 36 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -87,6 +98,11 @@ const StoryCard = ({ story, index }: { story: Story; index: number }) => {
         ease: "easeOut",
       }}
       whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 24 } }}
+      onPointerDown={(e) => e.stopPropagation()}
+      onClick={() => {
+        if (story.album && onAlbumClick) onAlbumClick(story);
+      }}
+      disabled={!story.album || !onAlbumClick}
     >
       <Image
         src={story.imageUrl}
@@ -100,11 +116,14 @@ const StoryCard = ({ story, index }: { story: Story; index: number }) => {
       <div className="relative z-10 flex flex-col justify-end h-full p-6 text-white">
         <h3 className="font-bold text-2xl tracking-wide">{story.title}</h3>
       </div>
-    </motion.div>
+    </motion.button>
   );
 };
 
-export default function EnhancedCarousel({ storiesData = defaultStoriesData }: CardProps) {
+export default function EnhancedCarousel({
+  storiesData = defaultStoriesData,
+  onAlbumClick,
+}: CardProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [dragConstraint, setDragConstraint] = useState(0);
@@ -161,7 +180,12 @@ export default function EnhancedCarousel({ storiesData = defaultStoriesData }: C
             dragElastic={0.15}
           >
             {storiesData.toReversed().map((story, index) => (
-              <StoryCard key={story.id} story={story} index={index} />
+              <StoryCard
+                key={story.id}
+                story={story}
+                index={index}
+                onAlbumClick={onAlbumClick}
+              />
             ))}
           </motion.div>
         </motion.div>
