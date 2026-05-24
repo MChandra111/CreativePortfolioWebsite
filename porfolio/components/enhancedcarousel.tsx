@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import BorderGlow from "@/components/BorderGlow";
@@ -124,23 +124,31 @@ export default function EnhancedCarousel({
   storiesData = defaultStoriesData,
   onAlbumClick,
 }: CardProps) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [dragConstraint, setDragConstraint] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const calculateConstraints = () => {
-      if (containerRef.current && trackRef.current) {
-        const containerWidth = containerRef.current.offsetWidth;
-        const trackWidth = trackRef.current.scrollWidth;
-        setDragConstraint(containerWidth - trackWidth);
-      }
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const onWheel = (e: WheelEvent) => {
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      if (maxScroll <= 0) return;
+
+      const delta =
+        Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      if (delta === 0) return;
+
+      const atStart = el.scrollLeft <= 0;
+      const atEnd = el.scrollLeft >= maxScroll - 1;
+
+      if ((delta > 0 && atEnd) || (delta < 0 && atStart)) return;
+
+      e.preventDefault();
+      el.scrollBy({ left: delta, behavior: "auto" });
     };
 
-    calculateConstraints();
-    window.addEventListener("resize", calculateConstraints);
-
-    return () => window.removeEventListener("resize", calculateConstraints);
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
   }, []);
 
   return (
@@ -164,21 +172,13 @@ export default function EnhancedCarousel({
         </header>
       <div className="w-full max-w-7xl mx-auto px-4">
 
-        <motion.div
-          ref={containerRef}
-          className="cursor-grab overflow-x-hidden overflow-y-visible px-4 pt-8 pb-2"
-          whileTap={{ cursor: "grabbing" }}
+        <div
+          ref={scrollRef}
+          className="overflow-x-auto overflow-y-visible overscroll-x-contain scroll-smooth px-4 pt-8 pb-4 scrollbar-thin [scrollbar-color:#334155_transparent] [&::-webkit-scrollbar]:h-2.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#334155]"
+          role="region"
+          aria-label="Digital albums carousel"
         >
-          <motion.div
-            ref={trackRef}
-            className="flex w-max space-x-6 px-4 pb-6"
-            drag="x"
-            dragConstraints={{
-              right: 0,
-              left: dragConstraint - 32,
-            }}
-            dragElastic={0.15}
-          >
+          <div className="flex w-max space-x-6 px-4 pb-2">
             {storiesData.toReversed().map((story, index) => (
               <StoryCard
                 key={story.id}
@@ -187,8 +187,8 @@ export default function EnhancedCarousel({
                 onAlbumClick={onAlbumClick}
               />
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
         <motion.div
           className="flex justify-center"
           initial={{ opacity: 0, y: 36 }}

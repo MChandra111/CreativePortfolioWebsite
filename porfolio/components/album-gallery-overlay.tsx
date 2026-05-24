@@ -131,6 +131,7 @@ export default function AlbumGalleryOverlay({
             fontWeight: "bold",
           },
           captionsTitleContainer: { alignItems: "center", background: "transparent" },
+          icon: { color: "#334155" }
         }}
         close={() => setLightboxIndex(-1)}
         slides={photos.map((p) => ({
