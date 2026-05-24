@@ -1,6 +1,6 @@
 "use client"
-import React from "react";
-import { ArrowRight } from "lucide-react";
+import React, { useMemo, useState } from "react";
+import { ArrowRight, Search } from "lucide-react";
 import { motion } from "framer-motion";
 
 const blogPosts = [
@@ -10,6 +10,7 @@ const blogPosts = [
     date: "2026-05-15",
     excerpt: "Learn how to set up a modern React application with TypeScript, exploring best practices and common patterns for type-safe development.",
     readTime: "5 min read",
+    tags: ["Artificial Intelligence", "Real Things"]
   },
   {
     id: 2,
@@ -17,6 +18,7 @@ const blogPosts = [
     date: "2026-05-08",
     excerpt: "Explore architectural patterns and design principles that help create maintainable and scalable web applications for growing teams.",
     readTime: "8 min read",
+    tags: ["Web Apps"]
   },
 ];
 
@@ -66,6 +68,21 @@ function BlogPostCard({ post, index }: { post: typeof blogPosts[0]; index: numbe
 }
 
 export default function BlogPage() {
+  const [query, setQuery] = useState("");
+
+  const filteredPosts = useMemo(() => {
+    const posts = blogPosts.toReversed();
+    const normalizedQuery = query.trim().toLowerCase();
+    if (!normalizedQuery) return posts;
+
+    return posts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(normalizedQuery) ||
+        post.excerpt.toLowerCase().includes(normalizedQuery) ||
+        post.tags.some((tag) => tag.toLowerCase().includes(normalizedQuery))
+    );
+  }, [query]);
+
   return (
     <div className="size-full overflow-auto" style={{ background: "linear-gradient(to bottom, #F9FAFB, #F3F4F6)" }}>
       <div className="max-w-3xl mx-auto px-8 py-12">
@@ -76,15 +93,38 @@ export default function BlogPage() {
           </div>
         </div>
 
+        <div className="relative mb-8">
+          <Search
+            size={18}
+            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2"
+            style={{ color: "#94A3B8" }}
+          />
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search posts..."
+            aria-label="Search blog posts"
+            className="w-full rounded-lg border bg-white py-2.5 pl-10 pr-4 text-sm outline-none transition-shadow focus:ring-2 focus:ring-[#334155]/20"
+            style={{ borderColor: "#E2E8F0", color: "#334155" }}
+          />
+        </div>
+
         <motion.div
           className="flex flex-col gap-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
         >
-          {blogPosts.toReversed().map((post, index) => (
-            <BlogPostCard key={post.id} post={post} index={index} />
-          ))}
+          {filteredPosts.length === 0 ? (
+            <p className="py-12 text-center" style={{ color: "#64748B" }}>
+              No posts found for &ldquo;{query.trim()}&rdquo;.
+            </p>
+          ) : (
+            filteredPosts.map((post, index) => (
+              <BlogPostCard key={post.id} post={post} index={index} />
+            ))
+          )}
         </motion.div>
       </div>
     </div>
