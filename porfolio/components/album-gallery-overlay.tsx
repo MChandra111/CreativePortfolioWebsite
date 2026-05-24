@@ -137,8 +137,8 @@ export default function AlbumGalleryOverlay({
         slides={photos.map((p) => ({
           src: p.src,
           alt: p.title,
-          title: p.date ? new Date(p.date).toLocaleDateString("en-US") : undefined,
-          description: p.location,
+          title: "",
+          description: (p.date ? new Date(p.date).toLocaleDateString("en-US") : undefined) + " | " + p.location,
         }))}
       />
 

@@ -89,7 +89,7 @@ const StoryCard = ({
   return (
     <motion.button
       type="button"
-      className="relative h-96 w-72 shrink-0 overflow-hidden rounded-lg shadow-xl group text-left"
+      className="relative h-96 w-72 shrink-0 overflow-hidden rounded-lg shadow-xl group text-left cursor-pointer"
       initial={{ opacity: 0, y: 36 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
