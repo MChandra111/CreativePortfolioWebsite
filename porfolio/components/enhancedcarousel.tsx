@@ -147,12 +147,12 @@ export default function EnhancedCarousel({ storiesData = defaultStoriesData }: C
 
         <motion.div
           ref={containerRef}
-          className="overflow-hidden cursor-grab"
+          className="cursor-grab overflow-x-hidden overflow-y-visible px-4 pt-8 pb-2"
           whileTap={{ cursor: "grabbing" }}
         >
           <motion.div
             ref={trackRef}
-            className="flex space-x-6 pb-6 px-4 w-max"
+            className="flex w-max space-x-6 px-4 pb-6"
             drag="x"
             dragConstraints={{
               right: 0,
@@ -160,7 +160,7 @@ export default function EnhancedCarousel({ storiesData = defaultStoriesData }: C
             }}
             dragElastic={0.15}
           >
-            {storiesData.map((story, index) => (
+            {storiesData.toReversed().map((story, index) => (
               <StoryCard key={story.id} story={story} index={index} />
             ))}
           </motion.div>

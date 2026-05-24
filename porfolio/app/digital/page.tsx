@@ -8,7 +8,7 @@ import EnhancedCarousel from "@/components/enhancedcarousel";
 
 const albums = [
   {
-    id: 1,
+    id: 5,
     imageUrl: "/albumCovers/Colorado26.jpg",
     title: "Colorado 2026",
     album: "colorado26",
@@ -16,15 +16,7 @@ const albums = [
     href: "/photos/colorado-2026"
   },
   {
-    id: 2,
-    imageUrl: "/albumCovers/2526Misc.jpg",
-    title: "2025-2026 Miscellaneous",
-    album: "misc2526",
-    tags: ["Nature", "Landscape"],
-    href: "/photos/los-cabos-2025"
-  },
-  {
-    id: 3,
+    id: 4,
     imageUrl: "/albumCovers/LosCabos25.jpg",
     title: "Los Cabos 2025",
     album: "loscabos25",
@@ -32,7 +24,7 @@ const albums = [
     href: "/photos/los-cabos-2025"
   },
   {
-    id: 4,
+    id: 3,
     imageUrl: "/albumCovers/Korea25.jpg",
     title: "South Korea 2025",
     album: "korea25",
@@ -40,7 +32,7 @@ const albums = [
     href: "/photos/south-korea-2025"
   },
   {
-    id: 5,
+    id: 2,
     imageUrl: "/albumCovers/Japan25.jpg",
     title: "Japan 2025",
     album: "japan25",
@@ -48,10 +40,10 @@ const albums = [
     href: "/photos/japan-2025"
   },
   {
-    id: 6,
-    imageUrl: "/albumCovers/2425Misc.jpg",
-    title: "2024-2025 Miscellaneous",
-    album: "misc2425",
+    id: 1,
+    imageUrl: "/albumCovers/Misc.jpg",
+    title: "Miscellaneous",
+    album: "misc",
     tags: ["Nature", "Landscape"],
     href: "/photos/iceland-2024"
   }
@@ -92,7 +84,7 @@ export default function DigitalPage() {
     <div className="mx-auto">
       <div className="justify-items-center-safe mt-10 px-6 pb-5 w-full h-full gap-6">
         <EnhancedCarousel
-          storiesData={albums
+          storiesData={albums.toReversed()
             .map((p, idx) => ({
               id: idx,
               title: p.title,
