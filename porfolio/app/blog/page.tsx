@@ -6,19 +6,12 @@ import { motion } from "framer-motion";
 const blogPosts = [
   {
     id: 1,
-    title: "Getting Started with React and TypeScript",
+    title: "WIP",
     date: "2026-05-15",
-    excerpt: "Learn how to set up a modern React application with TypeScript, exploring best practices and common patterns for type-safe development.",
-    readTime: "5 min read",
-    tags: ["Artificial Intelligence", "Real Things"]
-  },
-  {
-    id: 2,
-    title: "Building Scalable Web Applications",
-    date: "2026-05-08",
-    excerpt: "Explore architectural patterns and design principles that help create maintainable and scalable web applications for growing teams.",
-    readTime: "8 min read",
-    tags: ["Web Apps"]
+    excerpt: "WIP",
+    readTime: "0 min read",
+    tags: ["Artificial Intelligence"],
+    href: "#"
   },
 ];
 
@@ -40,7 +33,7 @@ function BlogPostCard({ post, index }: { post: typeof blogPosts[0]; index: numbe
         transition: { type: "spring", stiffness: 300, damping: 20 },
       }}
       whileTap={{ scale: 0.995 }}
-      onClick={() => window.open(`/blog/${post.id}`, "_blank")}
+      onClick={() => window.open(post.href, "_blank")}
     >
       <div className="flex items-start justify-between mb-3">
         <time className="text-sm" style={{ color: "#475569" }}>
