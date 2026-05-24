@@ -20,20 +20,6 @@ export const songs: Song[] = [
     duration: "3:00",
   },
   {
-    id: "2",
-    title: "Memento Mori",
-    artist: "Pop, Vocal",
-    src: "/music/MementoMori.mp3",
-    duration: "3:30",
-  },
-  {
-    id: "3",
-    title: "Melodies",
-    artist: "Pop, Vocal",
-    src: "/music/Melodies.mp3",
-    duration: "3:47",
-  },
-  {
     id: "4",
     title: "Whiplash",
     artist: "Pop, Instrumental",
