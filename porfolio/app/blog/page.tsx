@@ -51,7 +51,7 @@ function BlogPostCard({ post, index }: { post: typeof blogPosts[0]; index: numbe
         <span className="text-xs" style={{ color: "#94A3B8" }}>{post.readTime}</span>
       </div>
 
-      <h2 className="mb-3" style={{ color: "#334155" }}>{post.title}</h2>
+      <h2 className="mb-3 font-bold" style={{ color: "#334155" }}>{post.title}</h2>
 
       <p className="leading-relaxed mb-4" style={{ color: "#64748B" }}>
         {post.excerpt}

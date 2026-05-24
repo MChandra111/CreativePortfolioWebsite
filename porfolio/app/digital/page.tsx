@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { Photo } from "@/lib/types";
 import Atom from "react-loading-indicators/Atom";
 import EnhancedCarousel from "@/components/enhancedcarousel";
@@ -102,7 +103,16 @@ export default function DigitalPage() {
             }))}
         />
       </div>
-      <div className="mx-100 justify-items-start bg-[#334155] rounded-2xl">
+      <motion.div
+        className="mx-100 justify-items-start bg-[#334155] rounded-2xl"
+        initial={{ opacity: 0, y: 36 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.55,
+          delay: albums.length * 0.12,
+          ease: "easeOut",
+        }}
+      >
         <h2 className="text-4xl font-bold text-[#F9FAFB] pt-5 pl-5">Gear</h2>
         <p className="text-[#F9FAFB] text-lg p-5">
           Camera: Canon Rebel T7<br />
@@ -110,7 +120,7 @@ export default function DigitalPage() {
           Lens: Canon EF 50mm f/1.8 STM<br />
           Lens: Canon EF-S 55-250mm f/4-5.6 IS II<br />
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }

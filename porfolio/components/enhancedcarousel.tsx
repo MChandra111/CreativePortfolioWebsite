@@ -75,10 +75,17 @@ const defaultStoriesData: Story[] = [
   },
 ];
 
-const StoryCard = ({ story }: { story: Story }) => {
+const StoryCard = ({ story, index }: { story: Story; index: number }) => {
   return (
     <motion.div
       className="relative w-72 h-96 shrink-0 rounded-lg overflow-hidden shadow-xl group"
+      initial={{ opacity: 0, y: 36 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.12,
+        ease: "easeOut",
+      }}
       whileHover={{ y: -8, transition: { type: "spring", stiffness: 300 } }}
     >
       <Image
@@ -151,16 +158,25 @@ export default function EnhancedCarousel({ storiesData = defaultStoriesData }: C
             }}
             dragElastic={0.15}
           >
-            {storiesData.map((story) => (
-              <StoryCard key={story.id} story={story} />
+            {storiesData.map((story, index) => (
+              <StoryCard key={story.id} story={story} index={index} />
             ))}
           </motion.div>
         </motion.div>
-        <div className="flex justify-center">
+        <motion.div
+          className="flex justify-center"
+          initial={{ opacity: 0, y: 36 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.55,
+            delay: storiesData.length * 0.12,
+            ease: "easeOut",
+          }}
+        >
           <ArrowLeft size={30} color="#334155" className="" />
-           <Mouse size={30} color="#334155" className="mx-4" />
+          <Mouse size={30} color="#334155" className="mx-4" />
           <ArrowRight size={30} color="#334155" className="" />
-        </div>
+        </motion.div>
       </div>
     </div>
   );
