@@ -5,3 +5,6 @@ Link: https://maheshwarchandra.vercel.app
 A portfolio of my Software Projects, Photography, Music, and a Blog(WIP).
 
 Created in React using Next.js, Typescript, and TailwindCSS.
+
+TODO: Prevent software projects from being hardcoded
+TODO: Prevent albums from being hardcoded

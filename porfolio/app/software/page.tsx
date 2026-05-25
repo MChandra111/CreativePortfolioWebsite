@@ -20,7 +20,7 @@ const projects = [
     id: 2,
     name: "Photo Upload App",
     description: "A small Flask app used to upload, review, and annotate images for use on the photography section of this website.",
-    technologies: ["Python 3", "Flask", "Jinja2", "UI/X", "Data Annotation", "Cursor"],
+    technologies: ["Python 3", "Flask", "Jinja2", "UI/UX", "Data Annotation", "Cursor"],
     href: "https://github.com/MChandra111/PhotoUploadApp",
   },
   {
