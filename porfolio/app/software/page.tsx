@@ -131,7 +131,7 @@ export default function About() {
             </motion.a>
 
             <motion.a
-              href="https://pdflink.to/1ddacf4f/"
+              href="https://pdflink.to/1828aa7f/"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
