@@ -96,6 +96,7 @@ export default function FilmPage() {
           captionsDescription: { color: "334155", fontSize: "25px", justifyContent: "center", fontWeight: "bold" },
           captionsTitle: { color: "#334155", fontSize: "25px", fontWeight: "bold" },
           captionsTitleContainer: { alignItems: "center", background: "transparent" },
+          icon: { color: "#334155" }
         }}
         close={() => setLightboxIndex(-1)}
         slides={photos.map((p) => ({
