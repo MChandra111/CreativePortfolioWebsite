@@ -27,8 +27,8 @@ const projects = [
     id: 3,
     name: "Fake News Detection",
     description: "A machine learning model to identify and flag fake news articles.",
-    technologies: ["Python"],
-    href: "#",
+    technologies: ["Python 3", "BERT", "NLP", "Predictive Machine Learning", "Scikit-learn", "Numpy", "Pandas"],
+    href: "https://github.com/MChandra111/FakeNewsDetection",
   }
 ];
 
