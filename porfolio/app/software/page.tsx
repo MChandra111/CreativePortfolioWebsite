@@ -29,6 +29,13 @@ const projects = [
     description: "A machine learning model to identify and flag fake news articles.",
     technologies: ["Python 3", "BERT", "NLP", "Predictive Machine Learning", "Scikit-learn", "Numpy", "Pandas"],
     href: "https://github.com/MChandra111/FakeNewsDetection",
+  },
+  {
+    id: 4,
+    name: "ApplyDev",
+    description: "A multi-agent AI system that autonomously researches companies, parses JDs, generates tailored resume bullets and cover letters.",
+    technologies: ["LangGraph", "TavilyAI", "LangSmith", "RAG", "LLM-as-a-Judge", "Pinecone", "Agentic AI", "Groq", "Claude"],
+    href: "#",
   }
 ];
 
