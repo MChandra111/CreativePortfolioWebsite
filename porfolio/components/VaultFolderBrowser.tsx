@@ -21,7 +21,7 @@ function sortEntries(a: VaultEntry, b: VaultEntry) {
 }
 
 function FilesContainer({ children }: { children: React.ReactNode }) {
-  return <div className="space-y-4">{children}</div>;
+  return <div className="space-y-4 overflow-auto flex-1 pr-2">{children}</div>;
 }
 
 function FolderItem({ value, children }: { value: string; children: React.ReactNode }) {
@@ -55,12 +55,24 @@ function FolderTrigger({
 function FolderPanel({ open, children }: { open: boolean; children: React.ReactNode }) {
   return (
     <div
-      className="overflow-hidden opacity-100 transition-opacity duration-300 ease-out"
-      style={{ maxHeight: open ? 1200 : 0, opacity: open ? 1 : 0 }}
+      className="overflow-hidden opacity-100 transition-all duration-300 ease-out"
+      /* limit expansion so the left explorer never grows beyond this height */
+      style={{ maxHeight: open ? 560 : 0, opacity: open ? 1 : 0 }}
     >
-      {children}
+      <div style={{ maxHeight: 560, overflow: "auto", paddingRight: 8, paddingTop: 8 }}>{children}</div>
     </div>
   );
+}
+
+function filterOutAttachments(items: VaultEntry[]): VaultEntry[] {
+  return items
+    .filter((item) => item.name.toLowerCase() !== "attachments")
+    .map((item) => {
+      if (item.type === "folder" && item.children) {
+        return { ...item, children: filterOutAttachments(item.children).sort(sortEntries) };
+      }
+      return item;
+    });
 }
 
 function SubFiles({ children }: { children: React.ReactNode }) {
@@ -225,7 +237,7 @@ export default function VaultFolderBrowser() {
     );
   };
 
-  const sortedEntries = useMemo(() => [...entries].sort(sortEntries), [entries]);
+  const sortedEntries = useMemo(() => filterOutAttachments([...entries].sort(sortEntries)), [entries]);
   const selectedFile = useMemo(() => {
     if (!selectedPath) return null;
 
@@ -245,7 +257,7 @@ export default function VaultFolderBrowser() {
 
   return (
     <section className="grid min-h-screen gap-8 lg:grid-cols-[minmax(320px,33%)_minmax(0,67%)]">
-<div className="rounded-3xl border border-slate-700/80 bg-[#334155] p-6 shadow-xl shadow-slate-950/10 text-slate-50">
+  <div style={{ maxHeight: 1500 }} className="flex flex-col h-full overflow-hidden rounded-3xl border border-slate-700/80 bg-[#334155] p-6 shadow-xl shadow-slate-950/10 text-slate-50">
           <div className="mb-6 flex items-start justify-between gap-4">
             <div>
               <p className="text-sm uppercase tracking-[0.22em] text-slate-300">Handwritten Notes</p>
