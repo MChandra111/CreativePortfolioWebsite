@@ -33,8 +33,8 @@ const projects = [
   {
     id: 4,
     name: "ApplyDev",
-    description: "A multi-agent AI system that autonomously researches companies, parses JDs, generates tailored resume bullets and cover letters.",
-    technologies: ["LangGraph", "TavilyAI", "LangSmith", "RAG", "LLM-as-a-Judge", "Pinecone", "Agentic AI", "Groq", "Claude"],
+    description: "A multi-agent AI system that autonomously researches companies, parses JDs, and generates tailored resume bullets and cover letters.",
+    technologies: ["LangGraph", "Tavily", "LangSmith", "RAG", "LLM-as-a-Judge", "Pinecone", "Agentic AI", "Groq", "Claude Code", "MAS"],
     href: "#",
   }
 ];

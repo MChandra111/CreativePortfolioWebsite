@@ -14,7 +14,7 @@ const folders = [
   { id: 1, label: <Code size={60}/>, color: "#334155", href: "/software" },
   { id: 2, label: <Camera size={60}/>, color: "#334155", href: "/photography" },
   { id: 3, label: <Music size={60}/>, color: "#334155", href: "/music" },
-  { id: 4, label: <Newspaper size={60}/>, color: "#334155", href: "/blog" },
+  { id: 4, label: <Newspaper size={60}/>, color: "#334155", href: "/notes" },
 ];
 
 export default function Home() {

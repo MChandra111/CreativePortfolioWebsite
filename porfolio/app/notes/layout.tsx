@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "motion/react";
 
-export default function BlogLayout({
+export default function NotesLayout({
   children,
 }: {
   children: React.ReactNode;
