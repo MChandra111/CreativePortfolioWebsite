@@ -36,6 +36,13 @@ const projects = [
     description: "A multi-agent AI system that autonomously researches companies, parses JDs, and generates tailored resume bullets and cover letters.",
     technologies: ["LangGraph", "Tavily", "LangSmith", "RAG", "LLM-as-a-Judge", "Pinecone", "Agentic AI", "Groq", "Claude Code", "MAS"],
     href: "#",
+  },
+  {
+    id: 5,
+    name: "A-To-C Self-investment App",
+    description: "An application to help users invest in themselves through continuous learning and skill development.",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Supabase", "Claude API", "Cursor"],
+    href: "#",
   }
 ];
 
