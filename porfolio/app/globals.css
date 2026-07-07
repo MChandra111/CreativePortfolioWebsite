@@ -138,11 +138,23 @@ Icon Accent: F9FAFB
   * {
     @apply border-border outline-ring/50;
   }
+
+  html,
   body {
-    @apply bg-linear-to-br from-[#F9FAFB] to-[#F3F4F6] text-foreground overflow-y-auto;
+    height: 100%;
+    margin: 0;
   }
+
+  body {
+    @apply bg-linear-to-br from-[#F9FAFB] to-[#F3F4F6] text-foreground overflow-y-auto min-h-screen;
+  }
+
   html {
     @apply font-(--Inter) text-base;
+  }
+
+  #__next {
+    min-height: 100%;
   }
 
   .page-background {

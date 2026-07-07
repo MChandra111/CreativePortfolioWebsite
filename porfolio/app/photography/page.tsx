@@ -5,7 +5,6 @@ import Image from "next/image";
 import Digital from "./digital.jpg";
 import Film from "./film.jpg";
 import Portfolio from "./portfolio.jpg";
-import { InstagramIcon } from "@/components/ui/instagram";
 
 const photos = [
   {
@@ -30,29 +29,9 @@ const photos = [
 
 export default function Photo() {
   return (
-    <div className="mx-auto justify-items-center-safe mt-10 pt-6">
-      <div className="grid grid-cols-1 gap-5 flex-col justify-center pt-5 pb-10">
-            <motion.a
-                href="https://www.instagram.com/di0pika/"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 36 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.55,
-                  delay: 0,
-                  ease: "easeOut",
-                }}
-                className="p-3 rounded-full"
-                style={{ backgroundColor: "#334155", color: "#F9FAFB" }}
-              >
-                <InstagramIcon size={40} color="white" />
-              </motion.a>
-        </div>
+    <div className="mx-auto flex min-h-screen w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
       <motion.div
-        className="grid grid-cols-3 gap-20"
+        className="grid flex-1 w-full grid-cols-1 gap-4 md:grid-cols-3 md:gap-6 md:min-h-[70vh]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
@@ -73,24 +52,24 @@ export default function Photo() {
               transition: { type: "spring", stiffness: 300, damping: 24 },
             }}
             whileTap={{ scale: 0.98 }}
-            className="group block overflow-hidden rounded-xl shadow-lg bg-white/5"
+            className="group h-full overflow-hidden rounded-2xl bg-white/5 shadow-[0_12px_30px_rgba(2,6,23,0.2)]"
           >
-            <div className="relative h-200 max-h-fit w-100 bg-transparent">
+            <div className="relative h-full min-h-[320px] w-full bg-transparent">
               <Image
                 src={p.src}
                 alt={p.title}
-                height={224}
-                width={384}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
               <motion.div
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="absolute inset-0 bg-[#334155]/60 flex items-center justify-center"
+                className="absolute inset-0 flex items-center justify-center bg-[#334155]/60"
               >
                 <p
-                  className="text-[#F9FAFB] text-3xl font-bold px-4 h-full flex items-center justify-center"
+                  className="flex h-full items-center justify-center px-4 text-3xl font-bold text-[#F9FAFB]"
                   style={{ writingMode: "vertical-rl", textOrientation: "upright" }}
                 >
                   {p.title}

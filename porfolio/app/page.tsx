@@ -11,10 +11,10 @@ import { Newspaper } from "lucide-react";
 
 
 const folders = [
-  { id: 1, label: <Code size={60}/>, color: "#334155", href: "/software" },
-  { id: 2, label: <Camera size={60}/>, color: "#334155", href: "/photography" },
-  { id: 3, label: <Music size={60}/>, color: "#334155", href: "/music" },
-  { id: 4, label: <Newspaper size={60}/>, color: "#334155", href: "/notes" },
+  { id: 1, label: "Software", color: "#334155", href: "/software" },
+  { id: 2, label: "Photography", color: "#334155", href: "/photography" },
+  { id: 3, label: "Music", color: "#334155", href: "/music" },
+  { id: 4, label: "W.I.P.", color: "#334155", href: "#" },
 ];
 
 export default function Home() {
@@ -70,7 +70,7 @@ export default function Home() {
               stroke={"#53917E"}
               strokeWidth={0.1}
             />
-            <span className="absolute inset-0 flex items-center justify-center text-[#F9FAFB] text-3xl font-bold mt-6">
+            <span className="absolute inset-0 flex items-center justify-center text-[#F9FAFB] text-3xl font-style: italic mt-6">
               {folder.label}
             </span>
           </motion.div>
